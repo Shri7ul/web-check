@@ -148,6 +148,36 @@ async function main() {
     },
   });
 
+  // ---- New interactive states (Visual-First Optimization) ----------------
+  await shot("23-hero-gallery-open", "/", 1440, 900, {
+    before: async (page) => { await page.locator(".n-hero__main__open").click(); },
+  });
+  await shot("24-anatomy-selected", "/", 1440, 900, {
+    before: async (page) => {
+      await page.locator("#how-it-works").scrollIntoViewIfNeeded();
+      await page.locator(".n-works__hotspot").first().click();
+    },
+  });
+  await shot("25-anatomy-zugbee-switch", "/", 1440, 900, {
+    before: async (page) => {
+      await page.locator("#how-it-works").scrollIntoViewIfNeeded();
+      await page.locator(".n-anatomy__switch__btn").nth(1).click();
+      await page.locator(".n-works__hotspot").first().click();
+    },
+  });
+  await shot("26-stepper-five-stages", "/", 1440, 900, {
+    before: async (page) => {
+      await page.locator("#process").scrollIntoViewIfNeeded();
+      await page.locator(".n-step").nth(3).click();
+    },
+  });
+  await shot("27-hero-gallery-mobile", "/", 390, 844, {
+    before: async (page) => { await page.locator(".n-hero__main__open").click(); },
+  });
+  await shot("28-stepper-mobile", "/", 390, 844, {
+    before: async (page) => { await page.locator("#process").scrollIntoViewIfNeeded(); },
+  });
+
   await browser.close();
   console.log(JSON.stringify(results, null, 2));
 }

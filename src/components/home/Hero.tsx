@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { HeroGallery } from "./HeroGallery";
 
 /**
  * Scene 01 — THE MISSION.
- * Compact, visual-first hero: one headline, one supporting sentence, two
- * CTAs and one authentic AEGIS photograph. Deliberately does NOT fill the
- * viewport — the story continues immediately below.
+ * Balanced two-column hero: small mission label, the approved headline, one
+ * short sentence and two CTAs on the left; a main rover photograph with three
+ * clickable supporting tiles on the right. Compact by design — the next
+ * section is already visible on a typical desktop viewport.
  */
 export function Hero() {
   return (
@@ -33,16 +35,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="n-hero__right">
-        <img
-          src="/assets/rovers/t1.jpeg"
-          alt="The AEGIS tracked rescue rover with a raised 6-DOF arm on a wooden stair-and-rubble test course"
-          fetchPriority="high"
-        />
-        <div className="n-hero__cap">
-          <b>AEGIS — V2</b> · Official URRT photograph
-        </div>
-      </div>
+      <HeroGallery />
     </section>
   );
 }

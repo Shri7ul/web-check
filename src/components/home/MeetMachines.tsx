@@ -5,11 +5,10 @@ import { Reveal } from "@/components/ui/Reveal";
 
 /**
  * Scene 02 — MEET THE ROBOTS.
- * Compact responsive card grid: 3 / 2 / 2 / 1 columns. Each card holds a
- * small authentic rover photograph, the name, one short descriptor and an
- * Explore action that opens the full-screen product view via its direct URL.
- * Only two real rovers exist, so the third cell is an explicitly labelled
- * gateway tile — never a fabricated third machine.
+ * Heading is kept verbatim. Compact, consistent-ratio cards for the two
+ * documented rovers; the third desktop cell is a clearly labelled browse CTA,
+ * never a fabricated third machine. Each rover opens the full-screen product
+ * explorer through its direct URL.
  */
 const short: Record<string, string> = {
   aegis: "Tracked rescue UGV with a 6-DOF arm.",
@@ -25,7 +24,6 @@ export function MeetMachines() {
           index="02"
           eyebrow="Meet the Robots"
           title={<>Two machines. <em>One mission.</em></>}
-          intro="Two real rescue rovers, documented on URRT's official Projects page."
         />
 
         <div className="n-robots__grid">
@@ -50,25 +48,21 @@ export function MeetMachines() {
           ))}
 
           <Reveal className="n-robot n-robot--gate" delay={140}>
-            <Link href="/robots" aria-label="Explore the full robot universe">
+            <Link href="/robots" aria-label="Browse both verified robots on the full robot explorer">
               <div className="n-robot__media">
                 <img src="/assets/rovers/t2.jpeg" alt="AEGIS manoeuvring inside a confined wooden test structure" loading="lazy" />
-                <span className="n-robot__badge">The programme</span>
+                <span className="n-robot__badge">Browse all</span>
               </div>
               <div className="n-robot__meta">
-                <h3 className="n-robot__name">The full lineup.</h3>
-                <span className="n-robot__status">02 rovers</span>
+                <h3 className="n-robot__name">Both machines.</h3>
+                <span className="n-robot__status">02 verified rovers</span>
               </div>
-              <p className="n-robot__desc">Galleries, specifications and component breakdowns for both machines.</p>
+              <p className="n-robot__desc">Galleries, specifications and component breakdowns.</p>
               <div className="n-robot__cta">
-                Explore all <span aria-hidden="true">↗</span>
+                Open the robot universe <span aria-hidden="true">↗</span>
               </div>
             </Link>
           </Reveal>
-        </div>
-
-        <div className="n-robots__foot">
-          <Link className="n-link" href="/robots">Open the full robot universe <span aria-hidden="true">↗</span></Link>
         </div>
       </div>
     </section>

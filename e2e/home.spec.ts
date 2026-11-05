@@ -7,10 +7,12 @@ test.describe("Homepage", () => {
     await expect(h1).toBeVisible();
     await expect(h1).toContainText("a way in");
 
-    const heroImg = page.locator(".n-hero__right img");
+    const heroImg = page.locator(".n-hero__main img");
     await expect(heroImg).toHaveJSProperty("complete", true);
     const naturalWidth = await heroImg.evaluate((el: HTMLImageElement) => el.naturalWidth);
     expect(naturalWidth).toBeGreaterThan(0);
+    // The collage also exposes three clickable supporting photograph tiles.
+    await expect(page.locator(".n-hero__tile")).toHaveCount(3);
   });
 
   test("assembles the visual story in order, without a tree on the homepage", async ({ page }) => {
@@ -69,6 +71,59 @@ test.describe("Homepage", () => {
     );
     expect(opacities.length).toBeGreaterThan(0);
     expect(opacities.every((o) => o === 1), `opacities: ${opacities.join(",")}`).toBe(true);
+  });
+});
+
+test.describe("Homepage interactions", () => {
+  test("hero gallery opens, navigates, and closes with Escape restoring focus", async ({ page }) => {
+    await page.goto("/");
+    const trigger = page.locator(".n-hero__main__open");
+    await trigger.click();
+
+    const dialog = page.getByRole("dialog", { name: "URRT rover photo gallery" });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator(".n-gallery__thumb")).toHaveCount(4);
+
+    await dialog.getByRole("button", { name: "Next photograph" }).click();
+    await expect(dialog.locator(".n-gallery__cap")).toContainText("2 / 4");
+
+    await dialog.locator(".n-gallery__thumb").nth(3).click();
+    await expect(dialog.locator(".n-gallery__cap")).toContainText("4 / 4");
+
+    await page.keyboard.press("Escape");
+    await expect(dialog).toHaveCount(0);
+    await expect(trigger).toBeFocused();
+  });
+
+  test("rover anatomy hotspots, reset/overview, and rover switch work", async ({ page }) => {
+    await page.goto("/");
+    const section = page.locator("#how-it-works");
+    await section.scrollIntoViewIfNeeded();
+
+    await expect(section.locator(".n-anatomy__overview")).toBeVisible();
+    await expect(section.locator(".n-works__hotspot")).toHaveCount(3); // AEGIS
+
+    await section.locator(".n-works__hotspot").first().click();
+    await expect(section.locator(".n-works__panel__inner")).toBeVisible();
+    await expect(section.locator(".n-anatomy__overview")).toHaveCount(0);
+
+    await section.locator(".n-anatomy__reset").click();
+    await expect(section.locator(".n-anatomy__overview")).toBeVisible();
+
+    await section.locator(".n-anatomy__switch__btn").nth(1).click();
+    await expect(section.locator(".n-anatomy__switch__btn").nth(1)).toHaveAttribute("aria-pressed", "true");
+    await expect(section.locator(".n-works__hotspot")).toHaveCount(2); // Zugbee X1
+    // Honesty disclosure is present, not a fabricated 3D model.
+    await expect(section.locator(".n-anatomy__legend__note")).toContainText("No genuine URRT 3D model");
+  });
+
+  test("workflow exposes five interactive stages", async ({ page }) => {
+    await page.goto("/");
+    const section = page.locator("#process");
+    await section.scrollIntoViewIfNeeded();
+    await expect(section.locator(".n-step")).toHaveCount(5);
+    await section.locator(".n-step").nth(3).click();
+    await expect(section.locator(".n-steps__panel__copy .n-kicker")).toContainText("04 / 05");
   });
 });
 

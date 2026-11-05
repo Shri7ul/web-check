@@ -4,9 +4,9 @@ import { Reveal } from "@/components/ui/Reveal";
 
 /**
  * Scene 08 — THE PEOPLE BEHIND THE MACHINES.
- * A small grid of authentic team photographs and minimal copy. Links point to
- * the dedicated people / engineering pages; the Engineering Tree is not placed
- * on the homepage.
+ * A small grid of authentic team photographs, minimal copy and links to the
+ * People page and the separate Engineering Tree route. The tree itself is not
+ * placed on the homepage.
  */
 const tiles = [
   { src: "/assets/people/Team.jpg", alt: "URRT team members gathered with the rescue rover outdoors" },
@@ -35,17 +35,13 @@ export function People() {
               eyebrow="The People"
               title={<>The people behind <em>the machines.</em></>}
             />
-            <p>
-              15 published members across four subteams build the same machine — from the chassis
-              and circuits to autonomy and the documentation that gets it to competition.
-            </p>
-            <div className="n-team__tags n-mono">Mechanical · Electrical · Software · Operations</div>
+            <p>15 published members across four subteams build the same machine.</p>
             <div className="n-team__links">
               <Link className="n-btn n-btn--dark" href="/people">
                 Meet the team <span className="n-arrow" aria-hidden="true">↗</span>
               </Link>
-              <Link className="n-link" href="/engineering">
-                How we are organised <span aria-hidden="true">↗</span>
+              <Link className="n-link" href="/engineering-tree">
+                Engineering Tree <span aria-hidden="true">↗</span>
               </Link>
             </div>
           </Reveal>

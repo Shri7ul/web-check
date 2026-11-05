@@ -8,7 +8,7 @@ import { Reveal } from "@/components/ui/Reveal";
 /**
  * Scene 07 — THE JOURNEY.
  * Two-column editorial timeline. Left: date, sequence and milestone marker.
- * Right: title, short description, authentic media and a related record.
+ * Right: title, one short line, authentic media and a related record.
  * Verified milestones only; planned work is labelled. An IntersectionObserver
  * subtly highlights the milestone in view without hijacking scroll.
  */
@@ -19,6 +19,16 @@ const media: Record<string, { src: string; alt: string }> = {
   "tdp-tpf": { src: "/assets/scenes/a2.png", alt: "URRT team members with the tracked rescue rover and team banner" },
   "qualification-video": { src: "/assets/rovers/t3.jpeg", alt: "AEGIS climbing a wooden staircase during testing" },
   "robocup-2026": { src: "/assets/people/Team.jpg", alt: "URRT team members gathered with the rescue rover outdoors" },
+};
+
+/** Condensed homepage copy; the full verified descriptions live on /journey. */
+const short: Record<string, string> = {
+  formation: "URRT was founded in September 2024 to advance rescue robotics in Bangladesh.",
+  "zugbee-x1": "The first rover, Zugbee X1, was completed with basic mobility and sensors.",
+  "final-rover": "The timeline lists the final rover as fully workable; the Projects page still calls AEGIS in development.",
+  "tdp-tpf": "Team Description Paper and participation form prepared for entry.",
+  "qualification-video": "URRT published its official RoboCup Rescue 2026 qualification video.",
+  "robocup-2026": "A stated goal to represent Bangladesh at RoboCup Rescue — planned, not a result.",
 };
 
 const related: Record<string, { href: string; label: string }> = {
@@ -68,7 +78,6 @@ export function JourneySection() {
             <span>The Journey</span>
           </div>
           <h2 className="n-title n-display">From a first sketch to <em>RoboCup.</em></h2>
-          <p className="n-intro">Verified milestones only. Planned work is labelled — no competition outcomes are claimed.</p>
         </div>
 
         <div className="n-journey__list">
@@ -92,7 +101,7 @@ export function JourneySection() {
 
                 <Reveal className="n-journey__right" delay={70}>
                   <h3>{e.title}</h3>
-                  <p>{e.description}</p>
+                  <p>{short[e.id]}</p>
                   {m && (
                     <div className="n-journey__media">
                       <img src={m.src} alt={m.alt} loading="lazy" />

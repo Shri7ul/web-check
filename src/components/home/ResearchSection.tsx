@@ -3,7 +3,7 @@ import { SectionHead } from "./SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
 import { evidenceItems, experimentsDisclosure } from "@/content/experiments";
 
-/** Scene 06 — RESEARCH & EXPERIMENTS. Compact image cards, honest summaries. */
+/** Scene 06 — RESEARCH & EXPERIMENTS. Visual evidence cards, no invented data. */
 const highlights = [
   {
     slug: "terrain-traversal-testing",
@@ -42,7 +42,6 @@ export function ResearchSection() {
           index="06"
           eyebrow="Research & Experiments"
           title={<>What we are <em>learning to build.</em></>}
-          intro="Real artefacts, honest summaries. Nothing measured unless URRT published it."
         />
 
         <div className="n-research__grid">
@@ -57,7 +56,7 @@ export function ResearchSection() {
                 <p className="n-exp__purpose">{h.purpose}</p>
                 {bySlug.get(h.slug) && (
                   <Link className="n-link n-exp__link" href={`/experiments/${h.slug}`}>
-                    Open the record <span aria-hidden="true">↗</span>
+                    View details <span aria-hidden="true">↗</span>
                   </Link>
                 )}
               </div>
@@ -67,9 +66,8 @@ export function ResearchSection() {
 
         <Reveal className="n-research__note" delay={60}>
           <p>
-            <strong>{experimentsDisclosure.headline}.</strong>{" "}
-            Documented artefacts only — no invented datasets, metrics or charts.{" "}
-            <Link className="n-link" href="/experiments">Browse the evidence explorer <span aria-hidden="true">↗</span></Link>
+            {experimentsDisclosure.headline} — no invented metrics or charts.{" "}
+            <Link className="n-link" href="/experiments">Evidence explorer <span aria-hidden="true">↗</span></Link>
           </p>
         </Reveal>
       </div>

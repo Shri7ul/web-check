@@ -16,7 +16,7 @@
     "errors": []
   },
   {
-    "name": "03-problem-selected",
+    "name": "03-robots-grid",
     "url": "/",
     "viewport": "1440x900",
     "full": false,
@@ -24,7 +24,7 @@
     "errors": []
   },
   {
-    "name": "04-robots-showcase",
+    "name": "04-challenges-selected",
     "url": "/",
     "viewport": "1440x900",
     "full": false,
@@ -32,7 +32,7 @@
     "errors": []
   },
   {
-    "name": "05-works-selected",
+    "name": "05-works-hotspots",
     "url": "/",
     "viewport": "1440x900",
     "full": false,
@@ -40,7 +40,7 @@
     "errors": []
   },
   {
-    "name": "06-journey",
+    "name": "06-process-stepper",
     "url": "/",
     "viewport": "1440x900",
     "full": false,
@@ -48,7 +48,39 @@
     "errors": []
   },
   {
-    "name": "07-product-overlay",
+    "name": "07-research-cards",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "08-journey-timeline",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "09-team-preview",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "10-join-cta",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "11-product-overlay",
     "url": "/robots/aegis",
     "viewport": "1440x900",
     "full": false,
@@ -56,7 +88,7 @@
     "errors": []
   },
   {
-    "name": "08-engineering-tree-desktop",
+    "name": "12-engineering-tree-desktop",
     "url": "/engineering-tree",
     "viewport": "1440x900",
     "full": false,
@@ -64,7 +96,7 @@
     "errors": []
   },
   {
-    "name": "09-home-mobile-fold",
+    "name": "13-home-mobile-fold",
     "url": "/",
     "viewport": "390x844",
     "full": false,
@@ -72,7 +104,7 @@
     "errors": []
   },
   {
-    "name": "10-home-mobile-full",
+    "name": "14-home-mobile-full",
     "url": "/",
     "viewport": "390x844",
     "full": true,
@@ -80,7 +112,39 @@
     "errors": []
   },
   {
-    "name": "11-engineering-tree-mobile",
+    "name": "15-robots-mobile",
+    "url": "/",
+    "viewport": "390x844",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "16-challenges-mobile",
+    "url": "/",
+    "viewport": "390x844",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "17-works-mobile",
+    "url": "/",
+    "viewport": "390x844",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "18-process-mobile",
+    "url": "/",
+    "viewport": "390x844",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "19-engineering-tree-mobile",
     "url": "/engineering-tree",
     "viewport": "390x844",
     "full": false,
@@ -88,7 +152,15 @@
     "errors": []
   },
   {
-    "name": "12-tree-3d-stage",
+    "name": "20-home-320-fold",
+    "url": "/",
+    "viewport": "320x700",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "21-tree-3d-stage",
     "url": "/engineering-tree",
     "viewport": "1440x1000",
     "full": false,
@@ -96,8 +168,56 @@
     "errors": []
   },
   {
-    "name": "13-tree-2d-mobile-stage",
+    "name": "22-tree-2d-mobile-stage",
     "url": "/engineering-tree",
+    "viewport": "390x844",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "23-hero-gallery-open",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "24-anatomy-selected",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "25-anatomy-zugbee-switch",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "26-stepper-five-stages",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "27-hero-gallery-mobile",
+    "url": "/",
+    "viewport": "390x844",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "28-stepper-mobile",
+    "url": "/",
     "viewport": "390x844",
     "full": false,
     "overflowX": 0,
