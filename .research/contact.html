@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" href="images/umrt_logo.png" type="image/x-icon">
+    <title>Contact Us — URRT | UIU Rescue Rover Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep:    #0d0d0d;
+            --bg-mid:     #141414;
+            --bg-panel:   #1a1a1a;
+            --bg-card:    #1f1f1f;
+            --steel:      #2a2a2a;
+            --steel-light:#3a3a3a;
+            --amber:      #ff0400;
+            --amber-hot:  #ff6200;
+            --amber-dim:  #b45309;
+            --red:        #ef4444;
+            --red-hot:    #f87171;
+            --white:      #ffffff;
+            --muted:      #ffffff;
+            --muted-dim:  #aaaaaa;
+            --accent-teal:#ffbf00;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { overflow-x: hidden; scroll-behavior: smooth; }
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--white);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.04em;
+        }
+        .mono { font-family: 'Space Mono', monospace; }
+        .condensed { font-family: 'Barlow Condensed', sans-serif; }
+
+        /* Scan lines */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                0deg, transparent 0px, transparent 3px,
+                rgba(0,0,0,0.07) 3px, rgba(0,0,0,0.07) 4px
+            );
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* Noise */
+        .noise-bg {
+            position: fixed; top:0; left:0;
+            width:100%; height:100%; z-index:0;
+            pointer-events:none; opacity:0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* Grid BG */
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(245,158,11,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(245,158,11,0.04) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+
+        /* Hazard */
+        .hazard {
+            background: repeating-linear-gradient(
+                -55deg,
+                var(--amber) 0px, var(--amber) 10px,
+                var(--bg-deep) 10px, var(--bg-deep) 22px
+            );
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--amber), var(--amber-hot));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* NAV */
+        nav.site-nav {
+            background: rgba(13,13,13,0.96);
+            border-bottom: 1px solid var(--steel-light);
+            backdrop-filter: blur(12px);
+        }
+        nav.site-nav::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--amber) 30%, var(--amber) 70%, transparent);
+            opacity: 0.4;
+        }
+        .nav-link {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            transition: color 0.2s;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0;
+            width: 0; height: 1px;
+            background: var(--amber);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover { color: var(--amber); }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.active { color: var(--amber); }
+        .nav-link.active::after { width: 100%; }
+
+        /* BUTTONS */
+        .btn-primary {
+            background: var(--amber);
+            color: var(--bg-deep);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            border: none;
+            padding: 0.9rem 2.2rem;
+            clip-path: polygon(8px 0%,100% 0%,100% calc(100% - 8px),calc(100% - 8px) 100%,0% 100%,0% 8px);
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: var(--amber-hot);
+            box-shadow: 0 0 24px rgba(245,158,11,0.5);
+            transform: translateY(-2px);
+        }
+
+        /* PANEL */
+        .panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--steel-light);
+            position: relative;
+        }
+        .panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--amber), transparent);
+        }
+
+        /* SECTION LABEL */
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--amber);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .section-label::before {
+            content: '';
+            display: block;
+            width: 24px; height: 1px;
+            background: var(--amber);
+        }
+
+        /* CONTACT FORM */
+        .contact-form-input {
+            width: 100%;
+            background: var(--steel);
+            border: 1px solid var(--steel-light);
+            padding: 0.85rem 1rem;
+            color: var(--white);
+            font-family: 'Barlow', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+        .contact-form-input::placeholder { color: var(--muted-dim); }
+        .contact-form-input:focus {
+            border-color: var(--amber);
+            box-shadow: 0 0 0 2px rgba(255,4,0,0.15);
+            background: #323232;
+        }
+
+        /* SOCIAL */
+        .social-icon {
+            background: var(--steel);
+            border: 1px solid var(--steel-light);
+            width: 46px; height: 46px;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.25s;
+            text-decoration: none;
+        }
+        .social-icon:hover {
+            background: var(--amber);
+            border-color: var(--amber);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(255,4,0,0.35);
+        }
+        .social-icon:hover i { color: var(--bg-deep) !important; }
+
+        /* INFO CARD */
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--steel-light);
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 100%;
+            background: var(--amber);
+            transform: scaleY(0);
+            transform-origin: bottom;
+            transition: transform 0.3s ease;
+        }
+        .info-card:hover::before { transform: scaleY(1); }
+        .info-card:hover {
+            border-color: rgba(255,4,0,0.4);
+            box-shadow: 0 8px 32px rgba(255,4,0,0.1);
+            transform: translateX(4px);
+        }
+        .info-icon {
+            width: 48px; height: 48px;
+            background: rgba(255,4,0,0.12);
+            border: 1px solid rgba(255,4,0,0.3);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+        .info-card:hover .info-icon {
+            background: rgba(255,4,0,0.25);
+        }
+
+        /* CORNER BRACKET */
+        .bracket-box { position: relative; }
+        .bracket-box::before, .bracket-box::after {
+            content: '';
+            position: absolute;
+            width: 24px; height: 24px;
+            border-color: var(--amber);
+            border-style: solid;
+        }
+        .bracket-box::before {
+            top: -2px; left: -2px;
+            border-width: 2px 0 0 2px;
+        }
+        .bracket-box::after {
+            bottom: -2px; right: -2px;
+            border-width: 0 2px 2px 0;
+        }
+
+        /* HERO */
+        .hero-section {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-grid-line {
+            position: absolute;
+            background: rgba(255,4,0,0.06);
+        }
+
+        /* STATUS BADGE */
+        @keyframes blip {
+            0%,100%{box-shadow:0 0 0 0 rgba(255,4,0,0.7)}
+            50%{box-shadow:0 0 0 8px rgba(255,4,0,0)}
+        }
+        .blip {
+            width: 8px; height: 8px;
+            background: var(--amber);
+            border-radius: 50%;
+            animation: blip 2s infinite;
+            flex-shrink: 0;
+        }
+
+        /* MAP */
+        .map-container {
+            position: relative;
+            overflow: hidden;
+            height: 320px;
+            border: 1px solid var(--steel-light);
+        }
+        .map-container iframe { filter: brightness(0.8) contrast(1.1) saturate(0.9); }
+
+        /* TAG */
+        .tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.65rem;
+        }
+
+        /* FORM LABEL */
+        .form-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--muted-dim);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* SUCCESS msg */
+        .success-msg {
+            display: none;
+            background: rgba(34,197,94,0.12);
+            border: 1px solid rgba(34,197,94,0.4);
+            color: #4ade80;
+            padding: 1rem 1.25rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* FAQ ACCORDION */
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--steel-light);
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+        .faq-item.open { border-color: rgba(255,4,0,0.4); }
+        .faq-btn {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--white);
+            text-align: left;
+            padding: 1.25rem 1.5rem;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        .faq-btn:hover { color: var(--amber); }
+        .faq-icon {
+            width: 22px; height: 22px;
+            border: 1px solid var(--steel-light);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            color: var(--amber);
+        }
+        .faq-item.open .faq-icon { background: rgba(255,4,0,0.15); border-color: var(--amber); transform: rotate(45deg); }
+        .faq-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s;
+            padding: 0 1.5rem;
+        }
+        .faq-body.open {
+            max-height: 300px;
+            padding: 0 1.5rem 1.25rem;
+        }
+        .faq-body p { color: var(--muted-dim); font-size: 0.95rem; line-height: 1.7; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero-section { padding-top: 100px; }
+        }
+        @supports (padding: env(safe-area-inset-top)) {
+            nav { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+            footer { padding-bottom: calc(env(safe-area-inset-bottom) + 2rem); }
+        }
+
+        /* Page loading animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in-up { animation: fadeInUp 0.7s ease forwards; }
+
+        /* Animated counter line */
+        @keyframes lineGrow {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        .line-animate { animation: lineGrow 1.2s ease forwards; }
+
+        /* Mobile menu */
+        #mobile-menu { background: var(--bg-mid); border-top: 1px solid var(--steel-light); }
+
+        /* Cut corner */
+        .cut-corner {
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+        }
+    </style>
+</head>
+<body>
+
+<div class="noise-bg"></div>
+
+<!-- ================================================
+     NAVIGATION
+     ================================================ -->
+<nav class="site-nav fixed w-full z-50 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0 flex items-center">
+                <a href="index.html" class="flex items-center group gap-3">
+                    <img src="images/umrt_logo.png" alt="URRT Logo"
+                         class="h-10 w-10 rounded-full transition-all duration-300 group-hover:brightness-125">
+                    <img src="images/urrt_text.png" alt="URRT"
+                         class="h-7 md:h-9 transition-all duration-300 group-hover:brightness-125">
+                </a>
+            </div>
+            <div class="hidden md:flex items-baseline gap-6">
+                <a href="projects.html"   class="nav-link py-2">Projects</a>
+                <a href="Advisors.html"   class="nav-link py-2">Advisors</a>
+                <a href="member.html"     class="nav-link py-2">Team</a>
+                <a href="gears.html"      class="nav-link py-2">Gears</a>
+                <a href="video.html"      class="nav-link py-2">Qualification Video</a>
+                <a href="Assets.html"     class="nav-link py-2">Assets</a>
+                <a href="contact.html"    class="nav-link active py-2">Contact</a>
+                <a href="Join.html"       class="nav-link py-2">Join Us</a>
+                <a href="sponsor.html" class="btn-primary text-sm py-2 px-5">Sponsor</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white hover:text-amber-400 focus:outline-none transition-colors">
+                    <i data-feather="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden">
+        <div class="px-4 py-3 space-y-2">
+            <a href="projects.html"   class="block nav-link py-2">Projects</a>
+            <a href="Advisors.html"   class="block nav-link py-2">Advisors</a>
+            <a href="member.html"     class="block nav-link py-2">Team</a>
+            <a href="gears.html"      class="block nav-link py-2">Gears</a>
+            <a href="video.html"      class="block nav-link py-2">Qualification Video</a>
+            <a href="Assets.html"     class="block nav-link py-2">Assets</a>
+            <a href="contact.html"    class="block nav-link py-2">Contact</a>
+            <a href="Join.html"       class="block nav-link py-2">Join Us</a>
+            <a href="sponsor.html" class="block nav-link py-2">Become Sponsor</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ================================================
+     HERO BANNER
+     ================================================ -->
+<section class="hero-section grid-bg relative" style="background-color:var(--bg-deep)">
+    <!-- Decorative grid lines -->
+    <div class="hero-grid-line" style="left:15%;top:0;width:1px;height:100%"></div>
+    <div class="hero-grid-line" style="left:85%;top:0;width:1px;height:100%"></div>
+
+    <!-- Top hazard stripe -->
+    <div class="absolute top-0 left-0 right-0 h-1 hazard opacity-60"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <!-- Breadcrumb -->
+        <div class="flex items-center gap-2 mb-8 fade-in-up" style="animation-delay:0.1s">
+            <a href="index.html" class="mono text-xs hover:text-amber-400 transition-colors" style="color:var(--muted-dim)">HOME</a>
+            <span class="mono text-xs" style="color:var(--steel-light)">/</span>
+            <span class="mono text-xs" style="color:var(--amber)">CONTACT</span>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="section-label mb-5 fade-in-up" style="animation-delay:0.2s">Get In Touch</div>
+                <h1 class="text-7xl md:text-8xl lg:text-9xl mb-6 fade-in-up" style="animation-delay:0.3s; line-height:0.9">
+                    CON<span class="gradient-text">TACT</span><br>US
+                </h1>
+                <p class="text-lg leading-relaxed mb-8 fade-in-up" style="color:rgba(255,255,255,0.65);animation-delay:0.4s; max-width:520px">
+                    Have a question, partnership inquiry, or want to join our mission? We're ready to deploy. Reach out and our team will respond within 24 hours.
+                </p>
+
+                <!-- Status bar -->
+                <div class="flex items-center gap-3 fade-in-up" style="animation-delay:0.5s">
+                    <div class="blip"></div>
+                    <span class="mono text-xs" style="color:var(--amber)">SYSTEMS ONLINE</span>
+                    <span class="mono text-xs" style="color:var(--muted-dim)">// Response time: &lt; 24 hrs</span>
+                </div>
+
+                <!-- Animated accent line -->
+                <div class="mt-8 h-px overflow-hidden fade-in-up" style="background:var(--steel);animation-delay:0.6s">
+                    <div class="line-animate h-full" style="background:linear-gradient(90deg,var(--amber),var(--amber-hot),transparent);animation-delay:0.8s"></div>
+                </div>
+            </div>
+
+            <!-- Right: Quick info cards -->
+            <div class="space-y-4 fade-in-up" style="animation-delay:0.5s">
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope" style="color:var(--amber); font-size:1.1rem"></i>
+                    </div>
+                    <div>
+                        <div class="condensed font-bold tracking-widest text-xs mb-1" style="color:var(--muted-dim)">PRIMARY EMAIL</div>
+                        <div class="condensed font-bold text-lg text-white">rescuerover@cair.uiu.ac.bd</div>
+                        <div class="mono text-xs mt-1" style="color:var(--muted-dim)">General inquiries & partnership</div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-phone-alt" style="color:var(--amber); font-size:1.1rem"></i>
+                    </div>
+                    <div>
+                        <div class="condensed font-bold tracking-widest text-xs mb-1" style="color:var(--muted-dim)">PHONE</div>
+                        <div class="condensed font-bold text-lg text-white">+880 1909 356 346</div>
+                        <div class="mono text-xs mt-1" style="color:var(--muted-dim)">Mon–Fri &nbsp;|&nbsp; 09:00 – 17:00 BST</div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt" style="color:var(--amber); font-size:1.1rem"></i>
+                    </div>
+                    <div>
+                        <div class="condensed font-bold tracking-widest text-xs mb-1" style="color:var(--muted-dim)">HEADQUARTERS</div>
+                        <div class="condensed font-bold text-lg text-white">CAIR Lab, 4th Floor</div>
+                        <div class="mono text-xs mt-1" style="color:var(--muted-dim)">United International University, Dhaka</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom hazard -->
+    <div class="absolute bottom-0 left-0 right-0 h-1 hazard opacity-30"></div>
+</section>
+
+
+<!-- ================================================
+     MAIN CONTACT SECTION
+     ================================================ -->
+<section class="py-20 px-4 sm:px-6 lg:px-8 relative" style="background-color:var(--bg-mid)">
+    <div class="max-w-7xl mx-auto relative z-10">
+        <div class="grid lg:grid-cols-5 gap-10">
+
+            <!-- ---- LEFT: FORM (3 cols) ---- -->
+            <div class="lg:col-span-3" data-aos="fade-right">
+                <div class="bracket-box">
+                    <div class="panel p-8 md:p-10">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="mono text-xs" style="color:var(--amber)">// FORM_001</span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl gradient-text mb-2">SEND A MESSAGE</h2>
+                        <p class="text-sm mb-8" style="color:var(--muted-dim)">Fill out the form below and our team will get back to you shortly.</p>
+
+                        <!-- Success message -->
+                        <div id="success-msg" class="success-msg mb-6">
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-check-circle"></i>
+                                <span>MESSAGE TRANSMITTED — We'll respond within 24 hours.</span>
+                            </div>
+                        </div>
+
+                        <form id="contact-form" class="space-y-6" novalidate>
+
+                            <!-- Row 1: Name + Email -->
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="form-label" for="c-name">Full Name <span style="color:var(--amber)">*</span></label>
+                                    <input type="text" id="c-name" class="contact-form-input" placeholder="Your full name" required>
+                                    <div class="error-msg mono text-xs mt-1" style="color:var(--red);display:none">Name is required.</div>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="c-email">Email Address <span style="color:var(--amber)">*</span></label>
+                                    <input type="email" id="c-email" class="contact-form-input" placeholder="your@email.com" required>
+                                    <div class="error-msg mono text-xs mt-1" style="color:var(--red);display:none">Valid email required.</div>
+                                </div>
+                            </div>
+
+                            <!-- Row 2: Phone + Organization -->
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="form-label" for="c-phone">Phone Number</label>
+                                    <input type="tel" id="c-phone" class="contact-form-input" placeholder="+880 XXXX XXXXXX">
+                                </div>
+                                <div>
+                                    <label class="form-label" for="c-org">Organization</label>
+                                    <input type="text" id="c-org" class="contact-form-input" placeholder="Company / Institution">
+                                </div>
+                            </div>
+
+                            <!-- Subject dropdown -->
+                            <div>
+                                <label class="form-label" for="c-subject">Subject <span style="color:var(--amber)">*</span></label>
+                                <select id="c-subject" class="contact-form-input appearance-none" required>
+                                    <option value="">— Select a subject —</option>
+                                    <option value="Team Inquiry">Team Inquiry</option>
+                                    <option value="Collaboration">Collaboration</option>
+                                    <option value="Sponsorship">Sponsorship</option>
+                                    <option value="Recruitment">Recruitment</option>
+                                    <option value="Technical Inquiry">Technical Inquiry</option>
+                                    <option value="Media / Press">Media / Press</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <div class="error-msg mono text-xs mt-1" style="color:var(--red);display:none">Please select a subject.</div>
+                            </div>
+
+                            <!-- Message -->
+                            <div>
+                                <label class="form-label" for="c-message">Message <span style="color:var(--amber)">*</span></label>
+                                <textarea id="c-message" rows="5" class="contact-form-input resize-none" placeholder="Write your message here..." required></textarea>
+                                <div class="flex justify-between mt-1">
+                                    <div class="error-msg mono text-xs" style="color:var(--red);display:none">Message is required.</div>
+                                    <span id="char-count" class="mono text-xs ml-auto" style="color:var(--muted-dim)">0 / 1000</span>
+                                </div>
+                            </div>
+
+                            <!-- Inquiry type chips -->
+                            <div>
+                                <label class="form-label">Inquiry Type</label>
+                                <div class="flex flex-wrap gap-2" id="inquiry-chips">
+                                    <button type="button" class="chip tag" data-val="General" style="background:rgba(255,4,0,0.1);border:1px solid rgba(255,4,0,0.3);color:var(--amber);cursor:pointer;transition:all .2s">General</button>
+                                    <button type="button" class="chip tag" data-val="Sponsorship" style="background:rgba(255,4,0,0.1);border:1px solid rgba(255,4,0,0.3);color:var(--amber);cursor:pointer;transition:all .2s">Sponsorship</button>
+                                    <button type="button" class="chip tag" data-val="Technical" style="background:rgba(255,4,0,0.1);border:1px solid rgba(255,4,0,0.3);color:var(--amber);cursor:pointer;transition:all .2s">Technical</button>
+                                    <button type="button" class="chip tag" data-val="Partnership" style="background:rgba(255,4,0,0.1);border:1px solid rgba(255,4,0,0.3);color:var(--amber);cursor:pointer;transition:all .2s">Partnership</button>
+                                    <button type="button" class="chip tag" data-val="Media" style="background:rgba(255,4,0,0.1);border:1px solid rgba(255,4,0,0.3);color:var(--amber);cursor:pointer;transition:all .2s">Media</button>
+                                </div>
+                            </div>
+
+                            <!-- Submit -->
+                            <div class="flex items-center gap-4 pt-2">
+                                <button type="submit" class="btn-primary text-sm flex-1 justify-center py-4">
+                                    <i class="fas fa-paper-plane text-xs"></i>
+                                    Transmit Message
+                                </button>
+                            </div>
+
+                            <p class="mono text-xs" style="color:var(--muted-dim)">
+                                // By submitting, you agree that URRT may contact you regarding your inquiry.
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---- RIGHT: Info panel (2 cols) ---- -->
+            <div class="lg:col-span-2 space-y-6" data-aos="fade-left">
+
+                <!-- About URRT block -->
+                <div class="panel p-6">
+                    <div class="flex justify-center mb-5">
+                        <img src="images/aboutuslogo.png" alt="URRT Logo"
+                             class="h-20 w-20 rounded-full"
+                             style="border:2px solid var(--amber);box-shadow:0 0 20px rgba(255,4,0,0.3)"
+                             onerror="this.style.display='none'">
+                    </div>
+                    <h3 class="text-2xl gradient-text mb-3 text-center">ABOUT URRT</h3>
+                    <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.6)">
+                        The UIU Rescue Rover Team (URRT) is a group of passionate engineering students dedicated to designing advanced rescue rovers for disaster response operations. We represent Bangladesh at international competitions and push the frontier of autonomous robotics.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-4 justify-center">
+                        <span class="tag" style="background:rgba(255,4,0,0.1);border:1px solid rgba(255,4,0,0.3);color:var(--amber)">Rescue Robotics</span>
+                        <span class="tag" style="background:rgba(255,191,0,0.1);border:1px solid rgba(255,191,0,0.3);color:var(--accent-teal)">Autonomous Systems</span>
+                        <span class="tag" style="background:rgba(255,4,0,0.1);border:1px solid rgba(255,4,0,0.3);color:var(--amber)">RoboCup 2026</span>
+                    </div>
+                </div>
+
+                <!-- Social links -->
+                <div class="panel p-6">
+                    <h4 class="condensed font-bold tracking-widest text-sm mb-5 text-white">FOLLOW OUR MISSION</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <a href="https://www.facebook.com/share/1FaSe57Vd5/" target="_blank"
+                           class="social-link flex items-center gap-3 p-3 transition-all duration-250"
+                           style="background:var(--steel);border:1px solid var(--steel-light);text-decoration:none"
+                           onmouseover="this.style.borderColor='var(--amber)';this.style.background='rgba(255,4,0,0.1)'"
+                           onmouseout="this.style.borderColor='var(--steel-light)';this.style.background='var(--steel)'">
+                            <i class="fab fa-facebook-f w-4" style="color:var(--amber)"></i>
+                            <span class="condensed font-bold text-sm text-white tracking-wide">FACEBOOK</span>
+                        </a>
+                        <a href="https://www.instagram.com/uiurescuerover?igsh=MTVjeTY1cW9xeXV3aw==" target="_blank"
+                           class="social-link flex items-center gap-3 p-3 transition-all duration-250"
+                           style="background:var(--steel);border:1px solid var(--steel-light);text-decoration:none"
+                           onmouseover="this.style.borderColor='var(--amber)';this.style.background='rgba(255,4,0,0.1)'"
+                           onmouseout="this.style.borderColor='var(--steel-light)';this.style.background='var(--steel)'">
+                            <i class="fab fa-instagram w-4" style="color:var(--amber)"></i>
+                            <span class="condensed font-bold text-sm text-white tracking-wide">INSTAGRAM</span>
+                        </a>
+                        <a href="#" target="_blank"
+                           class="social-link flex items-center gap-3 p-3 transition-all duration-250"
+                           style="background:var(--steel);border:1px solid var(--steel-light);text-decoration:none"
+                           onmouseover="this.style.borderColor='var(--amber)';this.style.background='rgba(255,4,0,0.1)'"
+                           onmouseout="this.style.borderColor='var(--steel-light)';this.style.background='var(--steel)'">
+                            <i class="fab fa-linkedin-in w-4" style="color:var(--amber)"></i>
+                            <span class="condensed font-bold text-sm text-white tracking-wide">LINKEDIN</span>
+                        </a>
+                        <a href="#" target="_blank"
+                           class="social-link flex items-center gap-3 p-3 transition-all duration-250"
+                           style="background:var(--steel);border:1px solid var(--steel-light);text-decoration:none"
+                           onmouseover="this.style.borderColor='var(--amber)';this.style.background='rgba(255,4,0,0.1)'"
+                           onmouseout="this.style.borderColor='var(--steel-light)';this.style.background='var(--steel)'">
+                            <i class="fab fa-youtube w-4" style="color:var(--amber)"></i>
+                            <span class="condensed font-bold text-sm text-white tracking-wide">YOUTUBE</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Office hours -->
+                <div class="panel p-6">
+                    <h4 class="condensed font-bold tracking-widest text-sm mb-4 text-white">OPERATIONAL HOURS</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center pb-2" style="border-bottom:1px solid var(--steel-light)">
+                            <span class="condensed font-semibold text-sm" style="color:rgba(255,255,255,0.7)">Sunday – Thursday</span>
+                            <span class="mono text-xs" style="color:var(--amber)">08:00 – 20:00</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-2" style="border-bottom:1px solid var(--steel-light)">
+                            <span class="condensed font-semibold text-sm" style="color:rgba(255,255,255,0.7)">Friday</span>
+                            <span class="mono text-xs" style="color:var(--muted-dim)">CLOSED</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="condensed font-semibold text-sm" style="color:rgba(255,255,255,0.7)">Saturday</span>
+                            <span class="mono text-xs" style="color:var(--muted-dim)">CLOSED</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center gap-2 p-3" style="background:rgba(255,4,0,0.08);border:1px solid rgba(255,4,0,0.2)">
+                        <div class="blip"></div>
+                        <span class="mono text-xs" style="color:var(--amber)">Email response: within 24 hrs</span>
+                    </div>
+                </div>
+
+                <!-- Quick email CTA -->
+                <a href="mailto:rescuerover@cair.uiu.ac.bd"
+                   class="btn-primary w-full justify-center text-sm py-4 no-underline block text-center">
+                    <i class="fas fa-envelope text-xs"></i>
+                    Email Us Directly
+                </a>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================
+     MAP SECTION
+     ================================================ -->
+<section class="py-16 px-4 sm:px-6 lg:px-8 grid-bg" style="background-color:var(--bg-deep)">
+    <div class="absolute top-0 left-0 right-0 h-1 hazard opacity-40"></div>
+    <div class="max-w-7xl mx-auto">
+
+        <div class="text-center mb-12" data-aos="fade-up">
+            <div class="section-label justify-center mb-4">Location</div>
+            <h2 class="text-4xl md:text-5xl gradient-text">FIND OUR BASE</h2>
+            <p class="mt-3 max-w-2xl mx-auto text-sm" style="color:var(--muted-dim)">Located at the Center for Artificial Intelligence Research (CAIR), UIU Campus, Dhaka, Bangladesh.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8 items-start">
+
+            <!-- Map -->
+            <div class="lg:col-span-2" data-aos="fade-right">
+                <div class="bracket-box">
+                    <div class="map-container" style="height:400px">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.598346556767!2d90.42461497504862!3d23.79810607863617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7b33c7b87cd%3A0x8c3881b66eeb7e0c!2sUnited%20International%20University!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd"
+                            width="100%" height="100%"
+                            style="border:0"
+                            allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Address details -->
+            <div class="space-y-5" data-aos="fade-left">
+                <div class="panel p-6">
+                    <h3 class="condensed text-2xl text-white font-bold tracking-wide mb-5">LOCATION DETAILS</h3>
+                    <div class="space-y-5">
+                        <div class="flex gap-4">
+                            <div class="info-icon flex-shrink-0">
+                                <i class="fas fa-building" style="color:var(--amber)"></i>
+                            </div>
+                            <div>
+                                <div class="condensed font-bold tracking-widest text-xs mb-1" style="color:var(--muted-dim)">BUILDING</div>
+                                <div class="text-white font-medium">United International University</div>
+                                <div class="text-sm" style="color:var(--muted-dim)">CAIR Lab — 4th Floor, Academic Building</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="info-icon flex-shrink-0">
+                                <i class="fas fa-road" style="color:var(--amber)"></i>
+                            </div>
+                            <div>
+                                <div class="condensed font-bold tracking-widest text-xs mb-1" style="color:var(--muted-dim)">ADDRESS</div>
+                                <div class="text-white font-medium">United City, Madani Avenue</div>
+                                <div class="text-sm" style="color:var(--muted-dim)">Badda, Dhaka 1212, Bangladesh</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="info-icon flex-shrink-0">
+                                <i class="fas fa-subway" style="color:var(--amber)"></i>
+                            </div>
+                            <div>
+                                <div class="condensed font-bold tracking-widest text-xs mb-1" style="color:var(--muted-dim)">GETTING HERE</div>
+                                <div class="text-sm" style="color:var(--muted-dim)">Accessible via Madani Ave. Near Badda Link Road. Ample parking on campus.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://maps.app.goo.gl/CwgAxRgJQgHv7Vjq8" target="_blank"
+                       class="btn-primary w-full justify-center text-sm mt-6 no-underline block text-center">
+                        <i class="fas fa-directions text-xs"></i>
+                        Get Directions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================
+     FAQ SECTION
+     ================================================ -->
+<section class="py-20 px-4 sm:px-6 lg:px-8" style="background-color:var(--bg-mid)">
+    <div class="max-w-4xl mx-auto">
+
+        <div class="text-center mb-12" data-aos="fade-up">
+            <div class="section-label justify-center mb-4">FAQ</div>
+            <h2 class="text-4xl md:text-5xl gradient-text">COMMON QUESTIONS</h2>
+            <p class="mt-3" style="color:var(--muted-dim)">Quick answers to the questions we receive most often.</p>
+        </div>
+
+        <div class="space-y-3" data-aos="fade-up">
+
+            <div class="faq-item">
+                <button class="faq-btn" onclick="toggleFaq(this)">
+                    How can I join the URRT team?
+                    <div class="faq-icon">+</div>
+                </button>
+                <div class="faq-body">
+                    <p>We recruit passionate students from UIU across mechanical, electrical, and software engineering disciplines. Visit our <a href="Join.html" style="color:var(--amber)">Join Us</a> page to learn about open roles and apply. You can also email us directly with your CV and a short motivation letter.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-btn" onclick="toggleFaq(this)">
+                    How can my company sponsor URRT?
+                    <div class="faq-icon">+</div>
+                </button>
+                <div class="faq-body">
+                    <p>We offer tiered sponsorship packages ranging from equipment support to title sponsorship. In return, sponsors receive visibility on our rover, website, competition materials, and media coverage. Contact us at rescuerover@cair.uiu.ac.bd with the subject "Sponsorship" to receive our sponsorship prospectus.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-btn" onclick="toggleFaq(this)">
+                    What competitions is URRT preparing for?
+                    <div class="faq-icon">+</div>
+                </button>
+                <div class="faq-body">
+                    <p>Our primary target is RoboCup Rescue 2026, to be held in Icheon, South Korea in July 2026. This is the world's premier competition for urban search and rescue robotics, attracting teams from 40+ countries.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-btn" onclick="toggleFaq(this)">
+                    Can external researchers collaborate with URRT?
+                    <div class="faq-icon">+</div>
+                </button>
+                <div class="faq-body">
+                    <p>Yes! We welcome collaboration with researchers, universities, and industry professionals in the fields of robotics, AI, and autonomous systems. Please reach out via the contact form above or email us directly to discuss potential collaborations.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-btn" onclick="toggleFaq(this)">
+                    How long does it take to get a response?
+                    <div class="faq-icon">+</div>
+                </button>
+                <div class="faq-body">
+                    <p>We aim to respond to all inquiries within 24 hours on working days (Sunday–Thursday). For urgent matters, you can call us directly at +880 1909 356 346 between 9AM and 5PM BST.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- ================================================
+     FOOTER
+     ================================================ -->
+<footer style="background:var(--bg-deep);border-top:1px solid var(--steel-light)" class="py-8 px-4 sm:px-6 lg:px-8">
+    <div class="hazard h-1 mb-8 opacity-60"></div>
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          
+            <div class="flex gap-5">
+                <a href="https://www.facebook.com/share/1FaSe57Vd5/" style="color:var(--muted-dim)" class="hover:text-amber-400 transition-colors" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted-dim)'"><i data-feather="facebook" class="w-5 h-5"></i></a>
+                <a href="https://www.instagram.com/uiurescuerover?igsh=MTVjeTY1cW9xeXV3aw==" style="color:var(--muted-dim)" class="transition-colors" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted-dim)'"><i data-feather="instagram" class="w-5 h-5"></i></a>
+                <a href="#" style="color:var(--muted-dim)" class="transition-colors" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted-dim)'"><i data-feather="linkedin" class="w-5 h-5"></i></a>
+                <a href="#" style="color:var(--muted-dim)" class="transition-colors" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted-dim)'"><i data-feather="youtube" class="w-5 h-5"></i></a>
+            </div>
+            <p class="mono text-xs" style="color:var(--muted-dim)">&copy; 2026 URRT – UIU Rescue Rover Team. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ================================================
+     SCRIPTS
+     ================================================ -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
+    if (typeof feather !== 'undefined') feather.replace();
+
+    // Mobile menu
+    document.getElementById('mobile-menu-button').addEventListener('click', function () {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // ---- CHAR COUNTER ----
+    const msgEl = document.getElementById('c-message');
+    const countEl = document.getElementById('char-count');
+    msgEl.addEventListener('input', function () {
+        const len = this.value.length;
+        countEl.textContent = len + ' / 1000';
+        if (len > 900) countEl.style.color = 'var(--red)';
+        else countEl.style.color = 'var(--muted-dim)';
+        if (len > 1000) this.value = this.value.substring(0, 1000);
+    });
+
+    // ---- CHIPS ----
+    let selectedChip = null;
+    document.querySelectorAll('.chip').forEach(chip => {
+        chip.addEventListener('click', function () {
+            if (selectedChip === this) {
+                this.style.background = 'rgba(255,4,0,0.1)';
+                this.style.color = 'var(--amber)';
+                selectedChip = null;
+            } else {
+                if (selectedChip) {
+                    selectedChip.style.background = 'rgba(255,4,0,0.1)';
+                    selectedChip.style.color = 'var(--amber)';
+                }
+                this.style.background = 'var(--amber)';
+                this.style.color = 'var(--bg-deep)';
+                selectedChip = this;
+            }
+        });
+    });
+
+    // ---- FORM SUBMIT ----
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name    = document.getElementById('c-name');
+        const email   = document.getElementById('c-email');
+        const subject = document.getElementById('c-subject');
+        const msg     = document.getElementById('c-message');
+        let valid = true;
+
+        // Reset errors
+        document.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+
+        if (!name.value.trim()) {
+            name.nextElementSibling.style.display = 'block';
+            valid = false;
+        }
+        const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRe.test(email.value.trim())) {
+            email.nextElementSibling.style.display = 'block';
+            valid = false;
+        }
+        if (!subject.value) {
+            subject.nextElementSibling.style.display = 'block';
+            valid = false;
+        }
+        if (!msg.value.trim()) {
+            // show char count as error context
+            valid = false;
+        }
+
+        if (!valid) return;
+
+        const chipVal = selectedChip ? `[${selectedChip.dataset.val}] ` : '';
+        const org   = document.getElementById('c-org').value;
+        const phone = document.getElementById('c-phone').value;
+        const body  = `Name: ${name.value}\nEmail: ${email.value}\nPhone: ${phone}\nOrganization: ${org}\n\nMessage:\n${msg.value}`;
+
+        window.location.href = `mailto:rescuerover@cair.uiu.ac.bd?subject=${encodeURIComponent(chipVal + subject.value)}&body=${encodeURIComponent(body)}`;
+
+        document.getElementById('success-msg').style.display = 'block';
+        this.reset();
+        if (selectedChip) {
+            selectedChip.style.background = 'rgba(255,4,0,0.1)';
+            selectedChip.style.color = 'var(--amber)';
+            selectedChip = null;
+        }
+        countEl.textContent = '0 / 1000';
+    });
+});
+
+// ---- FAQ ACCORDION ----
+function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const body = item.querySelector('.faq-body');
+    const icon = btn.querySelector('.faq-icon');
+    const isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.faq-body').classList.remove('open');
+    });
+
+    if (!isOpen) {
+        item.classList.add('open');
+        body.classList.add('open');
+    }
+}
+</script>
+</body>
+</html>

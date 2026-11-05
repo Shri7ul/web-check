@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" href="images/umrt_logo.png" type="image/x-icon">
+    <title>Sponsors — URRT | UIU Rescue Rover Team</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep:     #0d0d0d;
+            --bg-mid:      #141414;
+            --bg-panel:    #1a1a1a;
+            --bg-card:     #1f1f1f;
+            --steel:       #2a2a2a;
+            --steel-light: #3a3a3a;
+            --amber:       #ff0400;
+            --amber-hot:   #ff6200;
+            --amber-dim:   #b45309;
+            --red:         #ef4444;
+            --white:       #ffffff;
+            --muted:       #cccccc;
+            --muted-dim:   #888888;
+            --accent-teal: #ffbf00;
+            /* Tier colors */
+            --gold:        #ffd700;
+            --gold-dim:    #b8960c;
+            --silver:      #c0c0c0;
+            --silver-dim:  #808080;
+            --bronze:      #cd7f32;
+            --bronze-dim:  #8b5513;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { overflow-x: hidden; scroll-behavior: smooth; }
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--white);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        h1,h2,h3,h4,h5,h6 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em; }
+        .mono      { font-family: 'Space Mono', monospace; }
+        .condensed { font-family: 'Barlow Condensed', sans-serif; }
+
+        /* ── SCAN LINES ── */
+        body::after {
+            content: '';
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            background: repeating-linear-gradient(0deg,transparent 0px,transparent 3px,rgba(0,0,0,0.07) 3px,rgba(0,0,0,0.07) 4px);
+            pointer-events: none; z-index: 9998;
+        }
+
+        /* ── NOISE ── */
+        .noise-bg {
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            z-index:0; pointer-events:none; opacity:0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ── GRID BG ── */
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(245,158,11,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(245,158,11,0.04) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+
+        /* ── HAZARD ── */
+        .hazard {
+            background: repeating-linear-gradient(
+                -55deg,
+                var(--amber) 0px, var(--amber) 10px,
+                var(--bg-deep) 10px, var(--bg-deep) 22px
+            );
+        }
+
+        /* ── GRADIENT TEXT ── */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--amber), var(--amber-hot));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .gradient-gold {
+            background: linear-gradient(90deg, var(--gold), #ffe97a, var(--gold));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .gradient-silver {
+            background: linear-gradient(90deg, var(--silver), #eee, var(--silver));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+        .gradient-bronze {
+            background: linear-gradient(90deg, var(--bronze), #e8a96c, var(--bronze));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+
+        /* ── NAV ── */
+        nav.site-nav {
+            background: rgba(13,13,13,0.96);
+            border-bottom: 1px solid var(--steel-light);
+            backdrop-filter: blur(12px);
+        }
+        nav.site-nav::after {
+            content: '';
+            position: absolute; bottom:0; left:0;
+            width:100%; height:1px;
+            background: linear-gradient(90deg,transparent,var(--amber) 30%,var(--amber) 70%,transparent);
+            opacity: 0.4;
+        }
+        .nav-link {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem; font-weight: 600;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--muted); transition: color 0.2s; position: relative;
+        }
+        .nav-link::after {
+            content: ''; position: absolute; bottom:-2px; left:0;
+            width:0; height:1px; background:var(--amber);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover  { color: var(--amber); }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.active { color: var(--amber); }
+        .nav-link.active::after { width: 100%; }
+
+        /* ── BUTTONS ── */
+        .btn-primary {
+            background: var(--amber); color: var(--bg-deep);
+            font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase; border: none;
+            padding: 0.9rem 2.2rem;
+            clip-path: polygon(8px 0%,100% 0%,100% calc(100% - 8px),calc(100% - 8px) 100%,0% 100%,0% 8px);
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+            display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            background: var(--amber-hot);
+            box-shadow: 0 0 28px rgba(255,98,0,0.5); transform: translateY(-2px);
+        }
+        .btn-outline {
+            background: transparent; color: var(--white);
+            font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.35);
+            padding: 0.9rem 2.2rem;
+            clip-path: polygon(8px 0%,100% 0%,100% calc(100% - 8px),calc(100% - 8px) 100%,0% 100%,0% 8px);
+            transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem;
+            text-decoration: none;
+        }
+        .btn-outline:hover { border-color: var(--amber); color: var(--amber); box-shadow: 0 0 20px rgba(255,4,0,0.2); }
+
+        /* ── SECTION LABEL ── */
+        .section-label {
+            font-family: 'Space Mono', monospace; font-size: 0.7rem;
+            letter-spacing: 0.2em; text-transform: uppercase; color: var(--amber);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        .section-label::before {
+            content: ''; display: block; width: 24px; height: 1px; background: var(--amber);
+        }
+
+        /* ── PANEL ── */
+        .panel {
+            background: var(--bg-panel); border: 1px solid var(--steel-light); position: relative;
+        }
+        .panel::before {
+            content: ''; position: absolute; top:0; left:0; right:0; height:2px;
+            background: linear-gradient(90deg, var(--amber), transparent);
+        }
+
+        /* ── CORNER BRACKET ── */
+        .bracket-box { position: relative; }
+        .bracket-box::before, .bracket-box::after {
+            content: ''; position: absolute;
+            width:24px; height:24px; border-color:var(--amber); border-style:solid;
+        }
+        .bracket-box::before { top:-2px; left:-2px; border-width:2px 0 0 2px; }
+        .bracket-box::after  { bottom:-2px; right:-2px; border-width:0 2px 2px 0; }
+
+        /* ── TAG ── */
+        .tag {
+            font-family: 'Space Mono', monospace; font-size: 0.65rem;
+            letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.65rem;
+        }
+
+        /* ── CUT CORNER ── */
+        .cut-corner {
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+        }
+
+        /* ── TIER BADGE ── */
+        .tier-badge {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.12em; font-size: 0.85rem;
+            padding: 0.3rem 1rem; display: inline-flex; align-items: center; gap: 0.5rem;
+        }
+
+        /* ── SPONSOR CARD ── */
+        .sponsor-card {
+            background: var(--bg-card); border: 1px solid var(--steel-light);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            overflow: hidden; position: relative; transition: all 0.35s; padding: 2rem;
+        }
+        .sponsor-card::before {
+            content: ''; position: absolute; top:0; left:-100%; width:100%; height:100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+            transition: left 0.5s ease;
+        }
+        .sponsor-card:hover::before { left: 100%; }
+
+
+        .sponsor-card img {
+    transition: transform 0.35s;
+    max-width: 220px; max-height: 100px; object-fit: contain;
+}
+.sponsor-card:hover img { transform: scale(1.06); }
+
+
+        .sponsor-card .card-name {
+            font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            font-size: 0.85rem; color: var(--muted-dim);
+            margin-top: 1rem; transition: color 0.3s;
+        }
+        .sponsor-card:hover .card-name { color: var(--white); }
+
+        /* Tier-specific borders on hover */
+        .tier-platinum .sponsor-card:hover { border-color: #e5e4e2; box-shadow: 0 8px 40px rgba(229,228,226,0.2); transform: translateY(-6px); }
+        .tier-gold     .sponsor-card:hover { border-color: var(--gold); box-shadow: 0 8px 40px rgba(255,215,0,0.25); transform: translateY(-6px); }
+        .tier-silver   .sponsor-card:hover { border-color: var(--silver); box-shadow: 0 8px 40px rgba(192,192,192,0.2); transform: translateY(-6px); }
+        .tier-bronze   .sponsor-card:hover { border-color: var(--bronze); box-shadow: 0 8px 40px rgba(205,127,50,0.2); transform: translateY(-6px); }
+        .tier-partner  .sponsor-card:hover { border-color: var(--amber); box-shadow: 0 8px 32px rgba(255,4,0,0.15); transform: translateY(-6px); }
+
+        /* Tier top accent */
+        .tier-platinum .sponsor-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,#e5e4e2,transparent); }
+        .tier-gold     .sponsor-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--gold),transparent); }
+        .tier-silver   .sponsor-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--silver),transparent); }
+        .tier-bronze   .sponsor-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--bronze),transparent); }
+        .tier-partner  .sponsor-card::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--amber),transparent); }
+
+        /* ── TIER SECTION HEADING ── */
+        .tier-heading {
+            display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+        }
+        .tier-heading-line {
+            flex: 1; height: 1px;
+        }
+        .tier-icon {
+            width: 40px; height: 40px; border: 1px solid; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+
+        /* ── PRICING CARD ── */
+        .pricing-card {
+            background: var(--bg-card); border: 1px solid var(--steel-light);
+            position: relative; overflow: hidden; transition: all 0.35s;
+        }
+        .pricing-card:hover { transform: translateY(-8px); }
+        .pricing-card.featured {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 1px rgba(255,215,0,0.2), 0 20px 60px rgba(255,215,0,0.1);
+        }
+        .pricing-card.featured::before {
+            content: ''; position:absolute; top:0; left:0; right:0; height:3px;
+            background: linear-gradient(90deg, var(--gold), #ffe97a, var(--gold));
+        }
+        .pricing-card:not(.featured)::before {
+            content: ''; position:absolute; top:0; left:0; right:0; height:2px;
+        }
+        .pricing-card.platinum-card::before { background: linear-gradient(90deg,#e5e4e2,transparent); }
+        .pricing-card.silver-card::before { background: linear-gradient(90deg,var(--silver),transparent); }
+        .pricing-card.bronze-card::before { background: linear-gradient(90deg,var(--bronze),transparent); }
+        .pricing-card.partner-card::before { background: linear-gradient(90deg,var(--amber),transparent); }
+
+        .pricing-card:hover:not(.featured) { border-color: rgba(255,4,0,0.4); box-shadow: 0 16px 48px rgba(255,4,0,0.1); }
+
+        .feature-row {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.6rem 0;
+        }
+        .feature-row:not(:last-child) { border-bottom: 1px solid var(--steel-light); }
+        .feature-check {
+            width: 20px; height: 20px; display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; border: 1px solid;
+        }
+
+        /* ── IMPACT STAT ── */
+        .impact-card {
+            background: var(--bg-card); border: 1px solid var(--steel-light);
+            padding: 1.5rem; text-align: center; position: relative; overflow: hidden;
+            transition: all 0.3s;
+        }
+        .impact-card::before {
+            content: ''; position: absolute; top:0; left:0; right:0; height:2px;
+            background: var(--amber);
+        }
+        .impact-card:hover { border-color: rgba(255,4,0,0.4); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(255,4,0,0.1); }
+        .impact-number {
+            font-family: 'Space Mono', monospace; font-size: 2.5rem;
+            font-weight: 700; color: var(--amber); line-height: 1;
+        }
+
+        /* ── FORM INPUTS ── */
+        .form-input {
+            width: 100%; background: var(--steel); border: 1px solid var(--steel-light);
+            padding: 0.85rem 1rem; color: var(--white);
+            font-family: 'Barlow', sans-serif; font-size: 0.95rem; outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+        .form-input::placeholder { color: var(--muted-dim); }
+        .form-input:focus { border-color: var(--amber); box-shadow: 0 0 0 2px rgba(255,4,0,0.15); background: #323232; }
+        .form-label {
+            font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem;
+            font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--muted-dim); display: block; margin-bottom: 0.5rem;
+        }
+
+        /* ── BLIP PULSE ── */
+        @keyframes blip { 0%,100%{box-shadow:0 0 0 0 rgba(255,4,0,0.7)} 50%{box-shadow:0 0 0 8px rgba(255,4,0,0)} }
+        .blip { width:8px; height:8px; background:var(--amber); border-radius:50%; animation:blip 2s infinite; flex-shrink:0; }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+        .fade-in-up { animation: fadeInUp 0.7s ease forwards; }
+
+        @keyframes shimmer {
+            0%   { background-position: -200% center; }
+            100% { background-position:  200% center; }
+        }
+        .shimmer-gold {
+            background: linear-gradient(90deg, var(--gold-dim) 0%, var(--gold) 40%, #fffacd 60%, var(--gold) 80%, var(--gold-dim) 100%);
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+
+        /* ── RIBBON ── */
+        .ribbon {
+            position: absolute; top: 16px; right: -28px;
+            background: var(--gold); color: var(--bg-deep);
+            font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+            font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 0.3rem 2.5rem; transform: rotate(45deg);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .hero-section { padding-top: 100px; }
+        }
+        @supports (padding: env(safe-area-inset-top)) {
+            nav  { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+            footer { padding-bottom: calc(env(safe-area-inset-bottom) + 2rem); }
+        }
+
+        /* ── PERKS GRID ── */
+        .perk-item {
+            background: var(--bg-card); border: 1px solid var(--steel-light);
+            padding: 1.5rem; transition: all 0.3s; position: relative; overflow: hidden;
+        }
+        .perk-item::before {
+            content:''; position:absolute; top:0; left:0; width:3px; height:100%;
+            background: var(--amber); transform:scaleY(0); transform-origin:bottom;
+            transition: transform 0.3s;
+        }
+        .perk-item:hover::before  { transform: scaleY(1); }
+        .perk-item:hover { border-color:rgba(255,4,0,0.3); box-shadow:0 8px 24px rgba(255,4,0,0.08); }
+        .perk-icon {
+            width:48px; height:48px; background:rgba(255,4,0,0.1); border:1px solid rgba(255,4,0,0.3);
+            display:flex; align-items:center; justify-content:center; margin-bottom:1rem;
+            transition: all 0.3s;
+        }
+        .perk-item:hover .perk-icon { background:rgba(255,4,0,0.2); }
+
+        /* Tab system */
+        .tab-btn {
+            font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 0.75rem 1.5rem; border: 1px solid var(--steel-light);
+            background: transparent; color: var(--muted-dim); cursor: pointer;
+            transition: all 0.2s; font-size: 0.85rem;
+        }
+        .tab-btn.active, .tab-btn:hover { background: rgba(255,4,0,0.1); border-color: rgba(255,4,0,0.5); color: var(--amber); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeInUp 0.4s ease; }
+    </style>
+</head>
+<body>
+<div class="noise-bg"></div>
+
+<!-- ════════════════════════════════════
+     NAVIGATION
+     ════════════════════════════════════ -->
+<nav class="site-nav fixed w-full z-50 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <a href="index.html" class="flex items-center group gap-3">
+                <img src="images/umrt_logo.png" alt="URRT Logo" class="h-10 w-10 rounded-full transition-all duration-300 group-hover:brightness-125" onerror="this.style.display='none'">
+                <img src="images/urrt_text.png" alt="URRT" class="h-7 md:h-9 transition-all duration-300 group-hover:brightness-125" onerror="this.style.display='none'">
+            </a>
+            <div class="hidden md:flex items-baseline gap-6">
+                <a href="projects.html"      class="nav-link py-2">Projects</a>
+                <a href="Advisors.html"      class="nav-link py-2">Advisors</a>
+                <a href="member.html"        class="nav-link py-2">Team</a>
+                <a href="gears.html"         class="nav-link py-2">Gears</a>
+                <a href="video.html"         class="nav-link py-2">Qualification Video</a>
+                <a href="Assets.html"        class="nav-link py-2">Assets</a>
+                <a href="contact.html"       class="nav-link py-2">Contact</a>
+                <a href="Join.html"          class="nav-link py-2">Join Us</a>
+                <a href="sponsor.html"       class="btn-primary text-sm py-2 px-5 active">Sponsor</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <i data-feather="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden" style="background:var(--bg-mid);border-top:1px solid var(--steel-light)">
+        <div class="px-4 py-3 space-y-2">
+            <a href="projects.html"  class="block nav-link py-2">Projects</a>
+            <a href="Advisors.html"  class="block nav-link py-2">Advisors</a>
+            <a href="member.html"    class="block nav-link py-2">Team</a>
+            <a href="gears.html"     class="block nav-link py-2">Gears</a>
+            <a href="video.html"     class="block nav-link py-2">Qualification Video</a>
+            <a href="Assets.html"    class="block nav-link py-2">Assets</a>
+            <a href="contact.html"   class="block nav-link py-2">Contact</a>
+            <a href="Join.html"      class="block nav-link py-2">Join Us</a>
+            <a href="sponsor.html"   class="block nav-link active py-2">Sponsor</a>
+        </div>
+    </div>
+</nav>
+
+
+<!-- ════════════════════════════════════
+     HERO
+     ════════════════════════════════════ -->
+<section class="hero-section relative overflow-hidden grid-bg" style="background-color:var(--bg-deep);padding-top:130px;padding-bottom:80px">
+    <!-- Hazard bars -->
+    <div class="absolute top-0 left-0 right-0 h-1 hazard opacity-60"></div>
+    <!-- Decorative vertical lines -->
+    <div class="absolute top-0 bottom-0 w-px opacity-10" style="left:10%;background:var(--amber)"></div>
+    <div class="absolute top-0 bottom-0 w-px opacity-10" style="right:10%;background:var(--amber)"></div>
+
+    <!-- Big background text -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden select-none">
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:clamp(8rem,25vw,22rem);color:rgba(255,4,0,0.03);line-height:1;letter-spacing:-0.02em;white-space:nowrap">SPONSOR</span>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Breadcrumb -->
+        <div class="flex items-center gap-2 mb-8 fade-in-up">
+            <a href="index.html" class="mono text-xs hover:text-amber-400 transition-colors" style="color:var(--muted-dim)">HOME</a>
+            <span class="mono text-xs" style="color:var(--steel-light)">/</span>
+            <span class="mono text-xs" style="color:var(--amber)">SPONSORS</span>
+        </div>
+
+        <div class="max-w-4xl">
+            <div class="section-label mb-5 fade-in-up" style="animation-delay:0.15s">Partnership & Support</div>
+            <h1 class="text-7xl md:text-9xl mb-6 fade-in-up" style="animation-delay:0.25s;line-height:0.88">
+                OUR<br><span class="gradient-text">SPONSORS</span>
+            </h1>
+            <div class="flex items-center gap-4 mb-6 fade-in-up" style="animation-delay:0.35s">
+                <div class="h-px flex-1" style="max-width:80px;background:linear-gradient(90deg,var(--amber),transparent)"></div>
+                <span class="mono text-xs tracking-widest" style="color:var(--accent-teal)">// FUELING RESCUE INNOVATION</span>
+            </div>
+            <p class="text-lg leading-relaxed mb-10 fade-in-up" style="color:rgba(255,255,255,0.6);animation-delay:0.4s;max-width:620px">
+                Behind every rover that rolls through a disaster zone is a network of visionary partners. Meet the organisations powering URRT's mission — and discover how your brand can be part of it.
+            </p>
+            <div class="flex flex-wrap gap-4 fade-in-up" style="animation-delay:0.5s">
+                <a href="#become-sponsor" class="btn-primary text-sm">Become a Sponsor</a>
+                <a href="#current-sponsors" class="btn-outline text-sm">View Current Sponsors</a>
+            </div>
+        </div>
+
+    
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     CURRENT SPONSORS
+     ════════════════════════════════════ -->
+<section id="current-sponsors" class="py-20 px-4 sm:px-6 lg:px-8" style="background-color:var(--bg-mid)">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16" data-aos="fade-up">
+            <div class="section-label justify-center mb-4">Partners</div>
+            <h2 class="text-5xl md:text-6xl gradient-text">CURRENT SPONSORS</h2>
+            <p class="mt-4 max-w-2xl mx-auto" style="color:var(--muted)">These organisations believe in our mission and make our work possible. We are deeply grateful for their support.</p>
+        </div>
+
+        <!-- ── PLATINUM ── -->
+        <div class="mb-16" data-aos="fade-up">
+            <div class="tier-heading">
+                <div class="tier-icon" style="border-color:#e5e4e2;color:#e5e4e2">
+                    <i class="fas fa-gem text-sm"></i>
+                </div>
+                <h3 class="text-3xl" style="font-family:'Bebas Neue',sans-serif;letter-spacing:0.08em;color:#e5e4e2">PLATINUM</h3>
+                <div class="tier-heading-line" style="background:linear-gradient(90deg,#e5e4e2,transparent)"></div>
+                <span class="tag" style="background:rgba(229,228,226,0.1);border:1px solid rgba(229,228,226,0.3);color:#e5e4e2;white-space:nowrap">TOP TIER</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="tier-platinum">
+                    <a href="https://www.uiu.ac.bd/" target="_blank" rel="noopener">
+                        <div class="sponsor-card cut-corner" style="height:180px">
+                            <img src="images/uiu-logo.png" alt="United International University">
+                           
+                        </div>
+                    </a>
+                </div>
+                <div class="tier-platinum">
+                    <a href="https://www.uiu.ac.bd/cair/" target="_blank" rel="noopener">
+                        <div class="sponsor-card cut-corner" style="height:180px">
+                            <img src="images/cair-logo.png" alt="CAIR">
+                            
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── GOLD ── -->
+        <div class="mb-16" data-aos="fade-up">
+            <div class="tier-heading">
+                <div class="tier-icon" style="border-color:var(--gold);color:var(--gold)">
+                    <i class="fas fa-trophy text-sm"></i>
+                </div>
+                <h3 class="text-3xl shimmer-gold" style="font-family:'Bebas Neue',sans-serif;letter-spacing:0.08em">GOLD</h3>
+                <div class="tier-heading-line" style="background:linear-gradient(90deg,var(--gold),transparent)"></div>
+                <span class="tag" style="background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.3);color:var(--gold);white-space:nowrap">PREMIUM</span>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="tier-gold">
+                    <a href="https://www.3ds.com/" target="_blank" rel="noopener">
+                        <div class="sponsor-card" style="height:150px">
+                            <img src="images/Dassauly-systemes-logo.png" alt="Dassault Systèmes">
+                           
+                        </div>
+                    </a>
+                </div>
+                <div class="tier-gold">
+                    <a href="https://www.solidworks.com/" target="_blank" rel="noopener">
+                        <div class="sponsor-card" style="height:150px">
+                            <img src="images/solidworks-logo.png" alt="SolidWorks">
+                           
+                        </div>
+                    </a>
+                </div>
+               
+            </div>
+        </div>
+
+        <!-- ── SILVER ── -->
+        <div class="mb-16" data-aos="fade-up">
+            <div class="tier-heading">
+                <div class="tier-icon" style="border-color:var(--silver);color:var(--silver)">
+                    <i class="fas fa-medal text-sm"></i>
+                </div>
+                <h3 class="text-3xl gradient-silver" style="font-family:'Bebas Neue',sans-serif;letter-spacing:0.08em">SILVER</h3>
+                <div class="tier-heading-line" style="background:linear-gradient(90deg,var(--silver),transparent)"></div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+                <div class="tier-silver">
+                    <a href="https://protospacemfg.com/" target="_blank" rel="noopener">
+                        <div class="sponsor-card" style="height:130px">
+                            <img src="images/protospace-logo.png" alt="Protospace">
+                            
+                        </div>
+                    </a>
+                </div>
+                <div class="tier-silver">
+                    <a href="https://www.dfrobot.com/" target="_blank" rel="noopener">
+                        <div class="sponsor-card" style="height:130px">
+                            <img src="images/DFRobot-logo.png" alt="DFRobot">
+                           
+                        </div>
+                    </a>
+                </div>
+              
+            </div>
+        </div>
+
+       
+
+    </div>
+</section>
+
+
+
+
+
+
+<!-- ════════════════════════════════════
+     CONTACT / SPONSOR FORM
+     ════════════════════════════════════ -->
+<section id="contact-form-section" class="py-20 px-4 sm:px-6 lg:px-8 grid-bg" style="background-color:var(--bg-deep)">
+    <div class="absolute top-0 left-0 right-0 h-1 hazard opacity-40"></div>
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-14" data-aos="fade-up">
+            <div class="section-label justify-center mb-4">Apply</div>
+            <h2 class="text-5xl md:text-6xl gradient-text">BECOME A SPONSOR</h2>
+            <p class="mt-4 max-w-2xl mx-auto" style="color:var(--muted)">Fill out the form below and our partnership team will contact you within 48 hours with a full prospectus tailored to your needs.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+
+            <!-- Form -->
+            <div class="lg:col-span-2" data-aos="fade-right">
+                <div class="bracket-box">
+                    <div class="panel p-8 md:p-10">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="blip"></div>
+                            <span class="mono text-xs" style="color:var(--amber)">PARTNERSHIP ENQUIRY FORM // URRT-2026</span>
+                        </div>
+
+                        <div id="sponsor-success" style="display:none;background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.4);color:#4ade80;padding:1rem 1.25rem;font-family:'Space Mono',monospace;font-size:0.8rem;letter-spacing:0.05em;margin-bottom:1.5rem">
+                            <i class="fas fa-check-circle mr-2"></i> ENQUIRY TRANSMITTED — We'll reach out within 48 hours.
+                        </div>
+
+                        <form id="sponsor-form" class="space-y-5" novalidate>
+                            <div class="grid md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="form-label">Contact Name <span style="color:var(--amber)">*</span></label>
+                                    <input type="text" id="sp-name" class="form-input" placeholder="Full name" required>
+                                </div>
+                                <div>
+                                    <label class="form-label">Organisation <span style="color:var(--amber)">*</span></label>
+                                    <input type="text" id="sp-org" class="form-input" placeholder="Company / Institution" required>
+                                </div>
+                            </div>
+                            <div class="grid md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="form-label">Email <span style="color:var(--amber)">*</span></label>
+                                    <input type="email" id="sp-email" class="form-input" placeholder="work@company.com" required>
+                                </div>
+                                <div>
+                                    <label class="form-label">Phone</label>
+                                    <input type="tel" id="sp-phone" class="form-input" placeholder="+880 XXXX XXXXXX">
+                                </div>
+                            </div>
+                           
+                            <div>
+                                <label class="form-label">Budget Range</label>
+                                <select id="sp-budget" class="form-input appearance-none">
+                                    <option value="">— Approximate budget —</option>
+                                    <option value="Under ৳25K">Under ৳25,000</option>
+                                    <option value="৳25K–75K">৳25,000 – ৳75,000</option>
+                                    <option value="৳75K–2L">৳75,000 – ৳2,00,000</option>
+                                    <option value="৳2L–5L">৳2,00,000 – ৳5,00,000</option>
+                                    <option value="৳5L+">৳5,00,000+</option>
+                                    <option value="In-Kind Only">In-Kind / Equipment only</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="form-label">Message</label>
+                                <textarea id="sp-message" rows="4" class="form-input resize-none" placeholder="Tell us about your goals, what you'd like to achieve through this partnership, any specific requests..."></textarea>
+                            </div>
+
+                           
+
+                            <button type="submit" class="btn-primary w-full justify-center text-sm py-4">
+                                <i class="fas fa-handshake text-xs"></i>
+                                Submit Partnership Enquiry
+                            </button>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side info -->
+            <div class="space-y-5" data-aos="fade-left">
+                <div class="panel p-6">
+                    <h4 class="condensed font-bold tracking-widest text-sm text-white mb-4">PARTNERSHIP CONTACT</h4>
+                    <div class="space-y-4">
+                        <a href="mailto:rescuerover@cair.uiu.ac.bd" class="flex items-start gap-3 group" style="text-decoration:none">
+                            <div class="mt-1 w-8 h-8 flex items-center justify-center flex-shrink-0" style="background:rgba(255,4,0,0.1);border:1px solid rgba(255,4,0,0.3)">
+                                <i class="fas fa-envelope text-xs" style="color:var(--amber)"></i>
+                            </div>
+                            <div>
+                                <div class="condensed font-bold text-xs tracking-widest mb-1" style="color:var(--muted-dim)">EMAIL</div>
+                                <div class="text-sm text-white group-hover:text-amber-400 transition-colors" style="word-break:break-all">rescuerover@cair.uiu.ac.bd</div>
+                            </div>
+                        </a>
+                        <a href="tel:+8801909356346" class="flex items-start gap-3 group" style="text-decoration:none">
+                            <div class="mt-1 w-8 h-8 flex items-center justify-center flex-shrink-0" style="background:rgba(255,4,0,0.1);border:1px solid rgba(255,4,0,0.3)">
+                                <i class="fas fa-phone text-xs" style="color:var(--amber)"></i>
+                            </div>
+                            <div>
+                                <div class="condensed font-bold text-xs tracking-widest mb-1" style="color:var(--muted-dim)">PHONE</div>
+                                <div class="text-sm text-white group-hover:text-amber-400 transition-colors">+880 1909 356 346</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="panel p-6">
+                    <h4 class="condensed font-bold tracking-widest text-sm text-white mb-4">WHAT YOU'LL RECEIVE</h4>
+                    <ul class="space-y-3 text-sm" style="color:var(--muted)">
+                        <li class="flex gap-2"><i class="fas fa-file-pdf mt-0.5" style="color:var(--amber);flex-shrink:0"></i>Full sponsorship prospectus PDF</li>
+                        <li class="flex gap-2"><i class="fas fa-comments mt-0.5" style="color:var(--amber);flex-shrink:0"></i>1-on-1 partnership call</li>
+                        <li class="flex gap-2"><i class="fas fa-edit mt-0.5" style="color:var(--amber);flex-shrink:0"></i>Customised proposal</li>
+                        <li class="flex gap-2"><i class="fas fa-clock mt-0.5" style="color:var(--amber);flex-shrink:0"></i>Response within 48 hours</li>
+                    </ul>
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════ -->
+<footer style="background:var(--bg-deep);border-top:1px solid var(--steel-light)" class="py-8 px-4 sm:px-6 lg:px-8">
+    <div class="hazard h-1 mb-8 opacity-60"></div>
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          
+            <div class="flex gap-5">
+                <a href="https://www.facebook.com/share/1FaSe57Vd5/" style="color:var(--muted-dim)" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted-dim)'"><i data-feather="facebook" class="w-5 h-5"></i></a>
+                <a href="https://www.instagram.com/uiurescuerover?igsh=MTVjeTY1cW9xeXV3aw==" style="color:var(--muted-dim)" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted-dim)'"><i data-feather="instagram" class="w-5 h-5"></i></a>
+                <a href="#" style="color:var(--muted-dim)" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted-dim)'"><i data-feather="linkedin" class="w-5 h-5"></i></a>
+                <a href="#" style="color:var(--muted-dim)" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='var(--muted-dim)'"><i data-feather="youtube" class="w-5 h-5"></i></a>
+            </div>
+            <p class="mono text-xs" style="color:var(--muted-dim)">&copy; 2026 URRT – UIU Rescue Rover Team. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+
+<!-- ════════════════════════════════════
+     SCRIPTS
+     ════════════════════════════════════ -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
+    if (typeof feather !== 'undefined') feather.replace();
+
+    // Mobile menu
+    document.getElementById('mobile-menu-button').addEventListener('click', function () {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function (e) {
+            const t = document.querySelector(this.getAttribute('href'));
+            if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 70, behavior: 'smooth' }); }
+        });
+    });
+
+    // ── GOAL CHECKBOXES ──
+    document.querySelectorAll('.goal-check').forEach(label => {
+        label.addEventListener('click', function () {
+            const cb = this.querySelector('.goal-cb');
+            const box = this.querySelector('.goal-box');
+            const icon = this.querySelector('.goal-icon');
+            cb.checked = !cb.checked;
+            if (cb.checked) {
+                box.style.background = 'var(--amber)';
+                box.style.borderColor = 'var(--amber)';
+                icon.classList.remove('hidden');
+            } else {
+                box.style.background = 'transparent';
+                box.style.borderColor = 'var(--steel-light)';
+                icon.classList.add('hidden');
+            }
+        });
+    });
+
+    // ── SPONSOR FORM SUBMIT ──
+    document.getElementById('sponsor-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const name  = document.getElementById('sp-name').value.trim();
+        const org   = document.getElementById('sp-org').value.trim();
+        const email = document.getElementById('sp-email').value.trim();
+        const tier  = document.getElementById('sp-tier').value;
+        const phone = document.getElementById('sp-phone').value;
+        const budget= document.getElementById('sp-budget').value;
+        const msg   = document.getElementById('sp-message').value;
+
+        if (!name || !org || !email || !tier) return;
+
+        const goals = [...document.querySelectorAll('.goal-cb:checked')].map(c => c.value).join(', ');
+        const body = [
+            `Contact: ${name}`,
+            `Organisation: ${org}`,
+            `Email: ${email}`,
+            `Phone: ${phone}`,
+            `Tier Interest: ${tier}`,
+            `Budget: ${budget}`,
+            `Goals: ${goals}`,
+            `\nMessage:\n${msg}`
+        ].join('\n');
+
+        window.location.href = `mailto:rescuerover@cair.uiu.ac.bd?subject=${encodeURIComponent('Sponsorship Enquiry — ' + tier)}&body=${encodeURIComponent(body)}`;
+
+        document.getElementById('sponsor-success').style.display = 'block';
+        this.reset();
+        document.querySelectorAll('.goal-box').forEach(b => { b.style.background='transparent'; b.style.borderColor='var(--steel-light)'; });
+        document.querySelectorAll('.goal-icon').forEach(i => i.classList.add('hidden'));
+    });
+});
+
+// ── TAB SWITCHER ──
+function switchTab(id, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active');
+}
+</script>
+</body>
+</html>

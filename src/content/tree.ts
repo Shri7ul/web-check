@@ -151,19 +151,19 @@ export const relationLegend = [
     kind: "hierarchy" as const,
     label: "Organisational hierarchy",
     description: "Who belongs to which team / group. The published structure.",
-    color: "#6E8B77",
+    color: "#191C1A",
   },
   {
     kind: "collaboration" as const,
     label: "Team-level engineering relationship",
     description: "A discipline relates to a platform at team level. It does NOT assert any individual member's contribution.",
-    color: "#B7F36B",
+    color: "#8A9189",
   },
   {
     kind: "contribution" as const,
     label: "Documented influence",
     description: "A directly documented relationship between two platforms (Zugbee X1 → AEGIS).",
-    color: "#DCE5D7",
+    color: "#B9BBB3",
   },
 ];
 

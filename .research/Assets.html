@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <link rel="icon" href="images/umrt_logo.png" type="image/x-icon">
+    <title>URRT — Brand Assets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep:    #0d0d0d;
+            --bg-mid:     #141414;
+            --bg-panel:   #1a1a1a;
+            --bg-card:    #1f1f1f;
+            --steel:      #2a2a2a;
+            --steel-light:#3a3a3a;
+            --amber:      #ff0400;
+            --amber-hot:  #ff6200;
+            --amber-dim:  #b45309;
+            --red:        #ef4444;
+            --red-hot:    #f87171;
+            --white:      #ffffff;
+            --muted:      #ffffff;
+            --muted-dim:  #ffffff;
+            --accent-teal:#ffbf00;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { overflow-x: hidden; scroll-behavior: smooth; }
+        body {
+            font-family: 'Barlow', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 0.04em;
+        }
+
+        /* ---- SCAN LINE ---- */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px, transparent 3px,
+                rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px
+            );
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* ---- NOISE ---- */
+        .noise-bg {
+            position: fixed; top:0; left:0;
+            width:100%; height:100%;
+            z-index: 0; pointer-events: none; opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ---- HAZARD ---- */
+        .hazard {
+            background: repeating-linear-gradient(
+                -55deg,
+                var(--amber) 0px, var(--amber) 10px,
+                var(--bg-deep) 10px, var(--bg-deep) 22px
+            );
+        }
+
+        /* ---- GRID BG ---- */
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(245,158,11,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(245,158,11,0.04) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+
+        /* ---- NAV ---- */
+        nav.site-nav {
+            background: rgba(13,13,13,0.96);
+            border-bottom: 1px solid var(--steel-light);
+            backdrop-filter: blur(12px);
+        }
+        nav.site-nav::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--amber) 30%, var(--amber) 70%, transparent);
+            opacity: 0.4;
+        }
+        .nav-link {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 0.85rem; font-weight: 600;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--muted); transition: color 0.2s;
+            position: relative;
+        }
+        .nav-link::after {
+            content: ''; position: absolute;
+            bottom: -2px; left: 0;
+            width: 0; height: 1px;
+            background: var(--amber); transition: width 0.3s ease;
+        }
+        .nav-link:hover { color: var(--amber); }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.active { color: var(--amber); }
+        .nav-link.active::after { width: 100%; }
+
+        /* ---- BUTTONS ---- */
+        .btn-primary {
+            background: var(--amber);
+            color: var(--bg-deep);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+            border: none; padding: 0.9rem 2.2rem;
+            clip-path: polygon(8px 0%,100% 0%,100% calc(100% - 8px),calc(100% - 8px) 100%,0% 100%,0% 8px);
+            transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+        .btn-primary:hover {
+            background: var(--amber-hot);
+            box-shadow: 0 0 24px rgba(245,158,11,0.5);
+            transform: translateY(-2px);
+        }
+
+        /* ---- SECTION LABEL ---- */
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+            color: var(--amber); display: flex; align-items: center; gap: 0.75rem;
+        }
+        .section-label::before {
+            content: ''; display: block; width: 24px; height: 1px;
+            background: var(--amber);
+        }
+
+        /* ---- GRADIENT TEXT ---- */
+        .gradient-text {
+            background: linear-gradient(90deg, var(--amber), var(--amber-hot));
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+        }
+
+        /* ---- MONO ---- */
+        .mono { font-family: 'Space Mono', monospace; }
+        .condensed { font-family: 'Barlow Condensed', sans-serif; }
+
+        /* ---- PANEL ---- */
+        .panel {
+            background: var(--bg-panel);
+            border: 1px solid var(--steel-light);
+            position: relative;
+        }
+        .panel::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, var(--amber), transparent);
+        }
+
+        /* ---- HERO ---- */
+        .hero-section {
+            background: var(--bg-mid);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: repeating-linear-gradient(-55deg, var(--amber) 0px, var(--amber) 10px, transparent 10px, transparent 22px);
+            opacity: 0.6;
+        }
+
+        /* ---- ASSET CATEGORY HEADER ---- */
+        .category-header {
+            display: flex; align-items: center; gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .category-header::after {
+            content: ''; flex: 1; height: 1px;
+            background: linear-gradient(90deg, var(--steel-light), transparent);
+        }
+
+        /* ---- ASSET CARD ---- */
+        .asset-card {
+            background: var(--bg-card);
+            border: 1px solid var(--steel-light);
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .asset-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, var(--amber), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .asset-card:hover {
+            border-color: var(--amber);
+            box-shadow: 0 12px 40px rgba(245,158,11,0.15);
+            transform: translateY(-5px);
+        }
+        .asset-card:hover::before { opacity: 1; }
+
+        /* ---- LOGO PREVIEW AREA ---- */
+        .logo-preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        .logo-preview.dark-bg  { background: var(--bg-deep); }
+        .logo-preview.mid-bg   { background: var(--bg-mid); }
+        .logo-preview.white-bg { background: #f5f5f5; }
+        .logo-preview.steel-bg { background: var(--steel); }
+        .logo-preview.checker-bg {
+            background-color: #ccc;
+            background-image:
+                linear-gradient(45deg, #aaa 25%, transparent 25%),
+                linear-gradient(-45deg, #aaa 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #aaa 75%),
+                linear-gradient(-45deg, transparent 75%, #aaa 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+        .logo-preview img {
+            max-width: 75%;
+            max-height: 140px;
+            object-fit: contain;
+            transition: transform 0.4s ease;
+        }
+        .asset-card:hover .logo-preview img { transform: scale(1.06); }
+
+        /* ---- BG TOGGLE BUTTONS ---- */
+        .bg-toggle-group {
+            display: flex;
+            gap: 0.4rem;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--steel-light);
+        }
+        .bg-toggle-btn {
+            width: 22px; height: 22px;
+            border: 2px solid var(--steel-light);
+            cursor: pointer;
+            transition: border-color 0.2s, transform 0.2s;
+            flex-shrink: 0;
+        }
+        .bg-toggle-btn:hover, .bg-toggle-btn.active {
+            border-color: var(--amber);
+            transform: scale(1.2);
+        }
+        .bg-toggle-btn.dark  { background: #0d0d0d; }
+        .bg-toggle-btn.mid   { background: #1f1f1f; }
+        .bg-toggle-btn.white { background: #f5f5f5; }
+        .bg-toggle-btn.steel { background: #3a3a3a; }
+        .bg-toggle-btn.check {
+            background-color: #ccc;
+            background-image:
+                linear-gradient(45deg, #aaa 25%, transparent 25%),
+                linear-gradient(-45deg, #aaa 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #aaa 75%),
+                linear-gradient(-45deg, transparent 75%, #aaa 75%);
+            background-size: 8px 8px;
+            background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+        }
+
+        /* ---- CARD INFO AREA ---- */
+        .card-info {
+            padding: 1rem 1.25rem;
+            flex: 1;
+        }
+        .card-footer {
+            padding: 1rem 1.25rem;
+            border-top: 1px solid var(--steel-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        /* ---- FORMAT BADGES ---- */
+        .format-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.5rem;
+            border: 1px solid;
+        }
+        .badge-png { color: #60a5fa; border-color: rgba(96,165,250,0.4); background: rgba(96,165,250,0.08); }
+        .badge-svg { color: #34d399; border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.08); }
+        .badge-jpg { color: #f59e0b; border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.08); }
+        .badge-pdf { color: #f87171; border-color: rgba(248,113,113,0.4); background: rgba(248,113,113,0.08); }
+        .badge-ai  { color: #fb923c; border-color: rgba(251,146,60,0.4);  background: rgba(251,146,60,0.08);  }
+
+        /* ---- DOWNLOAD BTN ---- */
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--amber);
+            color: var(--bg-deep);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            padding: 0.55rem 1.1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            clip-path: polygon(6px 0%,100% 0%,100% calc(100% - 6px),calc(100% - 6px) 100%,0% 100%,0% 6px);
+            text-decoration: none;
+        }
+        .btn-download:hover {
+            background: var(--amber-hot);
+            box-shadow: 0 4px 16px rgba(245,158,11,0.5);
+            transform: translateY(-2px);
+        }
+        .btn-download-all {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: var(--amber);
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(245,158,11,0.4);
+            cursor: pointer;
+            transition: all 0.2s;
+            clip-path: polygon(6px 0%,100% 0%,100% calc(100% - 6px),calc(100% - 6px) 100%,0% 100%,0% 6px);
+            text-decoration: none;
+        }
+        .btn-download-all:hover {
+            background: rgba(245,158,11,0.1);
+            border-color: var(--amber);
+        }
+
+        /* ---- UPLOAD ZONE ---- */
+        .upload-zone {
+            border: 2px dashed var(--steel-light);
+            background: var(--bg-panel);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--amber);
+            background: rgba(245,158,11,0.05);
+        }
+        .upload-zone input[type="file"] {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            opacity: 0; cursor: pointer;
+        }
+
+        /* ---- STATUS INDICATOR ---- */
+        @keyframes blip {
+            0%,100%{ box-shadow: 0 0 0 0 rgba(245,158,11,0.7); }
+            50%{ box-shadow: 0 0 0 8px rgba(245,158,11,0); }
+        }
+        .status-dot {
+            width: 8px; height: 8px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            animation: blip 2s infinite;
+            display: inline-block;
+        }
+
+        /* ---- FILTER BAR ---- */
+        .filter-btn {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            padding: 0.5rem 1.2rem;
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid var(--steel-light);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(245,158,11,0.12);
+            border-color: var(--amber);
+            color: var(--amber);
+        }
+
+        /* ---- USAGE RULES ---- */
+        .rule-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.85rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--steel-light);
+        }
+        .rule-ok  { border-left: 3px solid var(--accent-teal); }
+        .rule-no  { border-left: 3px solid var(--red); }
+
+        /* ---- CORNER BRACKET ---- */
+        .bracket-box { position: relative; }
+        .bracket-box::before, .bracket-box::after {
+            content: ''; position: absolute;
+            width: 18px; height: 18px;
+            border-color: var(--amber); border-style: solid;
+        }
+        .bracket-box::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+        .bracket-box::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+        /* ---- CUT CORNER ---- */
+        .cut-corner {
+            clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+        }
+
+        /* ---- TAG ---- */
+        .tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 0.2rem 0.6rem;
+        }
+
+        /* ---- RESPONSIVE ---- */
+        img { max-width: 100%; height: auto; }
+        @media (max-width: 640px) {
+            .logo-preview { height: 160px; }
+        }
+
+        /* ---- TOAST NOTIFICATION ---- */
+        #toast {
+            position: fixed;
+            bottom: 2rem; right: 2rem;
+            background: var(--bg-panel);
+            border: 1px solid var(--amber);
+            border-left: 3px solid var(--amber);
+            padding: 0.85rem 1.5rem;
+            z-index: 9999;
+            transform: translateX(200%);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex; align-items: center; gap: 0.75rem;
+        }
+        #toast.show { transform: translateX(0); }
+
+        /* ---- EMPTY STATE ---- */
+        .empty-slot {
+            background: var(--bg-card);
+            border: 2px dashed var(--steel-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 280px;
+            transition: border-color 0.3s;
+        }
+        .empty-slot:hover { border-color: rgba(245,158,11,0.4); }
+
+        /* Stat bar */
+        .stat-bar { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+        .stat-item { text-align: center; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+<div class="noise-bg"></div>
+
+<!-- ================================================
+     NAVIGATION
+     ================================================ -->
+<nav class="site-nav fixed w-full z-50 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <div class="flex-shrink-0 flex items-center">
+                <a href="index.html" class="flex items-center group gap-3">
+                    <img src="images/umrt_logo.png" alt="URRT Logo"
+                         class="h-10 w-10 rounded-full transition-all duration-300 group-hover:brightness-125"
+                         onerror="this.style.display='none'">
+                    <img src="images/urrt_text.png" alt="URRT"
+                         class="h-7 md:h-9 transition-all duration-300 group-hover:brightness-125"
+                         onerror="this.style.display='none'">
+                    <!-- Fallback text logo -->
+                   
+                </a>
+            </div>
+
+            <div class="hidden md:flex items-baseline gap-6">
+                    <a href="projects.html"           class="nav-link py-2">Projects</a>
+                    <a href="Advisors.html"        class="nav-link py-2">Advisors</a>
+                    <a href="member.html"          class="nav-link py-2">Team</a>
+                     <a href="gears.html"          class="nav-link py-2">Gears</a>
+                    <a href="video.html"           class="nav-link py-2">Qualification Video</a>
+                    <a href="Assets.html"           class="nav-link py-2">Assets</a>
+                    <a href="contact.html"             class="nav-link py-2">Contact</a>
+                    <a href="Join.html"            class="nav-link py-2">Join Us</a>
+                    <a href="sponsor.html"             class="btn-primary text-sm py-2 px-5">Sponsor</a>
+                </div>
+
+
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none transition-colors">
+                    <i data-feather="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden" style="background:var(--bg-mid);border-top:1px solid var(--steel-light)">
+        <div class="px-4 py-3 space-y-2">
+                <a href="projects.html"     class="block nav-link py-2">Projects</a>
+                <a href="Advisors.html" class="block nav-link py-2">Advisors</a>
+                <a href="member.html"   class="block nav-link py-2">Team</a>
+                <a href="gears.html"   class="block nav-link py-2">Gears</a>
+                <a href="video.html"    class="block nav-link py-2">Qualification Video</a>
+                <a href="Assets.html"   class="block nav-link py-2">Assets</a>
+                <a href="contact.html"      class="block nav-link py-2">Contact</a>
+                <a href="Join.html"     class="block nav-link py-2">Join Us</a>
+                <a href="sponsor.html"      class="block nav-link py-2">Become Sponsor</a>
+            </div>
+    </div>
+</nav>
+
+<!-- ================================================
+     PAGE HERO
+     ================================================ -->
+<section class="hero-section pt-28 pb-16 px-4 sm:px-6 lg:px-8 grid-bg relative z-10">
+    <!-- Left hazard bar -->
+    <div class="absolute top-0 left-0 w-1 h-full hazard opacity-40"></div>
+
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8" data-aos="fade-up">
+            <div>
+                <!-- Breadcrumb -->
+                <div class="flex items-center gap-2 mb-6">
+                    <a href="index.html" class="mono text-xs transition-colors" style="color:rgba(255,255,255,0.5)" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">HOME</a>
+                    <span class="mono text-xs" style="color:var(--steel-light)">/</span>
+                    <span class="mono text-xs" style="color:var(--amber)">BRAND ASSETS</span>
+                </div>
+
+                <div class="section-label mb-4">Official Resources</div>
+                <h1 class="text-6xl md:text-8xl font-normal mb-4" style="line-height:0.92">
+                    BRAND<br><span class="gradient-text">ASSETS</span>
+                </h1>
+                <p class="max-w-2xl text-base md:text-lg leading-relaxed" style="color:rgba(245,245,240,0.7)">
+                    Official logos, marks, and visual identity files for the UIU Rescue Rover Team.
+                    Download in your preferred format for press, academic, or partnership use.
+                </p>
+            </div>
+
+            <!-- Stats bar -->
+            <div class="panel p-6 min-w-[280px]" data-aos="fade-left">
+                <div class="mono text-xs mb-4" style="color:var(--amber)">// ASSET REGISTRY</div>
+                <div class="stat-bar">
+                    <div class="stat-item">
+                        <div class="mono text-3xl font-bold" style="color:var(--amber)" id="total-assets">0</div>
+                        <div class="condensed text-xs tracking-widest mt-1" style="color:rgba(255,255,255,0.5)">TOTAL FILES</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="mono text-3xl font-bold" style="color:var(--accent-teal)" id="total-categories">3</div>
+                        <div class="condensed text-xs tracking-widest mt-1" style="color:rgba(255,255,255,0.5)">CATEGORIES</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="flex items-center gap-2">
+                            <span class="status-dot"></span>
+                            <div class="mono text-xs" style="color:var(--accent-teal)">LIVE</div>
+                        </div>
+                        <div class="condensed text-xs tracking-widest mt-1" style="color:rgba(255,255,255,0.5)">STATUS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="flex flex-wrap items-center gap-3 mt-12" data-aos="fade-up" data-aos-delay="100">
+            <span class="mono text-xs" style="color:rgba(255,255,255,0.4)">FILTER:</span>
+            <button class="filter-btn active" data-filter="all" onclick="filterAssets(this,'all')">All Files</button>
+            <button class="filter-btn" data-filter="logos"      onclick="filterAssets(this,'logos')">Logos</button>
+            <button class="filter-btn" data-filter="marks"      onclick="filterAssets(this,'marks')">Team Marks</button>
+            <button class="filter-btn" data-filter="partners"   onclick="filterAssets(this,'partners')">Partner Logos</button>
+            <button class="filter-btn" data-filter="png"        onclick="filterAssets(this,'png')">PNG</button>
+            <button class="filter-btn" data-filter="svg"        onclick="filterAssets(this,'svg')">SVG</button>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================
+     USAGE GUIDELINES
+     ================================================ -->
+<section class="py-12 px-4 sm:px-6 lg:px-8 relative z-10" style="background:var(--bg-deep);border-bottom:1px solid var(--steel-light)">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up">
+            <div>
+                <div class="mono text-xs mb-4" style="color:var(--accent-teal)">// PERMITTED USE</div>
+                <div class="space-y-2">
+                    <div class="rule-item rule-ok">
+                        <i class="fas fa-check text-sm mt-0.5" style="color:var(--accent-teal);flex-shrink:0"></i>
+                        <span class="text-sm" style="color:rgba(255,255,255,0.75)">Press and media coverage of URRT activities</span>
+                    </div>
+                    <div class="rule-item rule-ok">
+                        <i class="fas fa-check text-sm mt-0.5" style="color:var(--accent-teal);flex-shrink:0"></i>
+                        <span class="text-sm" style="color:rgba(255,255,255,0.75)">Academic publications and conference papers</span>
+                    </div>
+                    <div class="rule-item rule-ok">
+                        <i class="fas fa-check text-sm mt-0.5" style="color:var(--accent-teal);flex-shrink:0"></i>
+                        <span class="text-sm" style="color:rgba(255,255,255,0.75)">Official partner and sponsor materials</span>
+                    </div>
+                    <div class="rule-item rule-ok">
+                        <i class="fas fa-check text-sm mt-0.5" style="color:var(--accent-teal);flex-shrink:0"></i>
+                        <span class="text-sm" style="color:rgba(255,255,255,0.75)">Team member portfolios and presentations</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="mono text-xs mb-4" style="color:var(--red)">// NOT PERMITTED</div>
+                <div class="space-y-2">
+                    <div class="rule-item rule-no">
+                        <i class="fas fa-times text-sm mt-0.5" style="color:var(--red);flex-shrink:0"></i>
+                        <span class="text-sm" style="color:rgba(255,255,255,0.75)">Modifying colors, proportions, or typography</span>
+                    </div>
+                    <div class="rule-item rule-no">
+                        <i class="fas fa-times text-sm mt-0.5" style="color:var(--red);flex-shrink:0"></i>
+                        <span class="text-sm" style="color:rgba(255,255,255,0.75)">Using logos on competing or unrelated products</span>
+                    </div>
+                    <div class="rule-item rule-no">
+                        <i class="fas fa-times text-sm mt-0.5" style="color:var(--red);flex-shrink:0"></i>
+                        <span class="text-sm" style="color:rgba(255,255,255,0.75)">Commercial use without written permission</span>
+                    </div>
+                    <div class="rule-item rule-no">
+                        <i class="fas fa-times text-sm mt-0.5" style="color:var(--red);flex-shrink:0"></i>
+                        <span class="text-sm" style="color:rgba(255,255,255,0.75)">Placing logos on busy backgrounds without approval</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================
+     MAIN ASSETS AREA
+     ================================================ -->
+<main class="py-20 px-4 sm:px-6 lg:px-8 grid-bg relative z-10" style="background-color:var(--bg-mid)">
+    <div class="max-w-7xl mx-auto">
+
+        <!-- ============================================
+             CATEGORY: TEAM LOGOS
+             ============================================ -->
+        <div class="mb-20 asset-group" data-category="logos" data-aos="fade-up">
+            <div class="category-header">
+                <div>
+                    <div class="mono text-xs mb-1" style="color:var(--amber)">// 01</div>
+                    <h2 class="text-4xl gradient-text">TEAM LOGOS</h2>
+                </div>
+                <span class="tag" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:var(--amber)">PRIMARY MARKS</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="logos-grid">
+
+                <!-- URRT Main Logo (PNG) -->
+                <div class="asset-card" data-formats="png" data-category="logos">
+                    <div class="bg-toggle-group">
+                        <span class="mono text-xs mr-1" style="color:rgba(255,255,255,0.35)">BG:</span>
+                        <button class="bg-toggle-btn dark active"  title="Dark"       onclick="setBg(this,'dark-bg')"   data-target="logo-1"></button>
+                        <button class="bg-toggle-btn mid"          title="Mid"        onclick="setBg(this,'mid-bg')"    data-target="logo-1"></button>
+                        <button class="bg-toggle-btn white"        title="White"      onclick="setBg(this,'white-bg')"  data-target="logo-1"></button>
+                        <button class="bg-toggle-btn steel"        title="Steel"      onclick="setBg(this,'steel-bg')"  data-target="logo-1"></button>
+                        <button class="bg-toggle-btn check"        title="Transparent" onclick="setBg(this,'checker-bg')" data-target="logo-1"></button>
+                    </div>
+                    <div class="logo-preview dark-bg" id="logo-1">
+                        <img src="images/umrt_logo.png" alt="URRT Main Logo"
+                             onerror="this.src='';this.alt='[Image will appear here]';this.style.display='none';this.parentElement.innerHTML+='<div class=\'mono text-xs text-center p-4\' style=\'color:rgba(255,255,255,0.3)\'>umrt_logo.png<br><span style=\'color:var(--amber)\'>Drop your file here</span></div>'">
+                    </div>
+                    <div class="card-info">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <h3 class="condensed text-lg font-bold tracking-wide text-white">URRT MAIN LOGO</h3>
+                            <span class="format-badge badge-png">PNG</span>
+                        </div>
+                        <p class="mono text-xs mb-3" style="color:rgba(255,255,255,0.45)">umrt_logo.png</p>
+                        <p class="text-sm" style="color:rgba(255,255,255,0.6)">Primary circular team emblem. Use for official documents, social media profiles, and merchandise.</p>
+                    </div>
+                 
+                </div>
+
+                <!-- URRT Text Logo (PNG) -->
+                <div class="asset-card" data-formats="png" data-category="logos">
+                    <div class="bg-toggle-group">
+                        <span class="mono text-xs mr-1" style="color:rgba(255,255,255,0.35)">BG:</span>
+                        <button class="bg-toggle-btn dark active"  onclick="setBg(this,'dark-bg')"    data-target="logo-2"></button>
+                        <button class="bg-toggle-btn mid"          onclick="setBg(this,'mid-bg')"     data-target="logo-2"></button>
+                        <button class="bg-toggle-btn white"        onclick="setBg(this,'white-bg')"   data-target="logo-2"></button>
+                        <button class="bg-toggle-btn steel"        onclick="setBg(this,'steel-bg')"   data-target="logo-2"></button>
+                        <button class="bg-toggle-btn check"        onclick="setBg(this,'checker-bg')" data-target="logo-2"></button>
+                    </div>
+                    <div class="logo-preview dark-bg" id="logo-2">
+                        <img src="images/urrt_text.png" alt="URRT Text Logo"
+                             onerror="this.src='';this.style.display='none';this.parentElement.innerHTML+='<div class=\'mono text-xs text-center p-4\' style=\'color:rgba(255,255,255,0.3)\'>urrt_text.png<br><span style=\'color:var(--amber)\'>Drop your file here</span></div>'">
+                    </div>
+                    <div class="card-info">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <h3 class="condensed text-lg font-bold tracking-wide text-white">URRT TEXT WORDMARK</h3>
+                            <span class="format-badge badge-png">PNG</span>
+                        </div>
+                        <p class="mono text-xs mb-3" style="color:rgba(255,255,255,0.45)">urrt_text.png</p>
+                        <p class="text-sm" style="color:rgba(255,255,255,0.6)">Horizontal wordmark for use in navigation bars, banners, and co-branding scenarios.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="images/urrt_text.png" download="URRT_Text_Wordmark.png" class="btn-download">
+                            <i data-feather="download" class="w-3 h-3"></i> Download PNG
+                        </a>
+                        <span class="mono text-xs" style="color:rgba(255,255,255,0.3)">PNG</span>
+                    </div>
+                </div>
+
+                <!-- About Us Logo (PNG) -->
+                <div class="asset-card" data-formats="png" data-category="logos">
+                    <div class="bg-toggle-group">
+                        <span class="mono text-xs mr-1" style="color:rgba(255,255,255,0.35)">BG:</span>
+                        <button class="bg-toggle-btn dark active"  onclick="setBg(this,'dark-bg')"    data-target="logo-3"></button>
+                        <button class="bg-toggle-btn mid"          onclick="setBg(this,'mid-bg')"     data-target="logo-3"></button>
+                        <button class="bg-toggle-btn white"        onclick="setBg(this,'white-bg')"   data-target="logo-3"></button>
+                        <button class="bg-toggle-btn steel"        onclick="setBg(this,'steel-bg')"   data-target="logo-3"></button>
+                        <button class="bg-toggle-btn check"        onclick="setBg(this,'checker-bg')" data-target="logo-3"></button>
+                    </div>
+                    <div class="logo-preview dark-bg" id="logo-3">
+                        <img src="images/aboutuslogo.png" alt="URRT About Logo"
+                             onerror="this.src='';this.style.display='none';this.parentElement.innerHTML+='<div class=\'mono text-xs text-center p-4\' style=\'color:rgba(255,255,255,0.3)\'>aboutuslogo.png<br><span style=\'color:var(--amber)\'>Drop your file here</span></div>'">
+                    </div>
+                    <div class="card-info">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <h3 class="condensed text-lg font-bold tracking-wide text-white">URRT ABOUT LOGO</h3>
+                            <span class="format-badge badge-png">PNG</span>
+                        </div>
+                        <p class="mono text-xs mb-3" style="color:rgba(255,255,255,0.45)">aboutuslogo.png</p>
+                        <p class="text-sm" style="color:rgba(255,255,255,0.6)">Secondary emblem variant used in about and contact sections.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="images/aboutuslogo.png" download="URRT_About_Logo.png" class="btn-download">
+                            <i data-feather="download" class="w-3 h-3"></i> Download PNG
+                        </a>
+                        <span class="mono text-xs" style="color:rgba(255,255,255,0.3)">PNG</span>
+                    </div>
+                </div>
+
+            
+
+            </div>
+        </div>
+
+        <!-- ============================================
+             CATEGORY: TEAM MARKS
+             ============================================ -->
+        <div class="mb-20 asset-group" data-category="marks" data-aos="fade-up">
+            <div class="category-header">
+                <div>
+                    <div class="mono text-xs mb-1" style="color:var(--amber)">// 02</div>
+                    <h2 class="text-4xl gradient-text">TEAM MARKS</h2>
+                </div>
+                <span class="tag" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);color:var(--amber)">ICONS &amp; EMBLEMS</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="marks-grid">
+
+                <!-- Robot Icon -->
+                <div class="asset-card" data-formats="png" data-category="marks">
+                    <div class="bg-toggle-group">
+                        <span class="mono text-xs mr-1" style="color:rgba(255,255,255,0.35)">BG:</span>
+                        <button class="bg-toggle-btn dark active"  onclick="setBg(this,'dark-bg')"    data-target="mark-1"></button>
+                        <button class="bg-toggle-btn mid"          onclick="setBg(this,'mid-bg')"     data-target="mark-1"></button>
+                        <button class="bg-toggle-btn white"        onclick="setBg(this,'white-bg')"   data-target="mark-1"></button>
+                        <button class="bg-toggle-btn check"        onclick="setBg(this,'checker-bg')" data-target="mark-1"></button>
+                    </div>
+                    <div class="logo-preview dark-bg" id="mark-1">
+                        <img src="images/robot.png" alt="Robot Icon"
+                             onerror="this.src='';this.style.display='none';this.parentElement.innerHTML+='<div class=\'mono text-xs text-center p-4\' style=\'color:rgba(255,255,255,0.3)\'>robot.png<br><span style=\'color:var(--amber)\'>Drop your file here</span></div>'">
+                    </div>
+                    <div class="card-info">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <h3 class="condensed text-lg font-bold tracking-wide text-white">ROBOT ICON MARK</h3>
+                            <span class="format-badge badge-png">PNG</span>
+                        </div>
+                        <p class="mono text-xs mb-3" style="color:rgba(255,255,255,0.45)">robot.png</p>
+                        <p class="text-sm" style="color:rgba(255,255,255,0.6)">Competition and event graphic for RoboCup references and promotional material.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="images/robot.png" download="URRT_Robot_Icon.png" class="btn-download">
+                            <i data-feather="download" class="w-3 h-3"></i> Download PNG
+                        </a>
+                        <span class="mono text-xs" style="color:rgba(255,255,255,0.3)">PNG</span>
+                    </div>
+                </div>
+
+                <!-- UIU Logo -->
+                <div class="asset-card" data-formats="png" data-category="marks partners">
+                    <div class="bg-toggle-group">
+                        <span class="mono text-xs mr-1" style="color:rgba(255,255,255,0.35)">BG:</span>
+                        <button class="bg-toggle-btn dark active"  onclick="setBg(this,'dark-bg')"    data-target="mark-2"></button>
+                        <button class="bg-toggle-btn mid"          onclick="setBg(this,'mid-bg')"     data-target="mark-2"></button>
+                        <button class="bg-toggle-btn white"        onclick="setBg(this,'white-bg')"   data-target="mark-2"></button>
+                        <button class="bg-toggle-btn check"        onclick="setBg(this,'checker-bg')" data-target="mark-2"></button>
+                    </div>
+                    <div class="logo-preview dark-bg" id="mark-2">
+                        <img src="images/uiu-logo.png" alt="UIU Logo"
+                             style="filter:brightness(0) invert(1)"
+                             onerror="this.src='';this.style.display='none';this.parentElement.innerHTML+='<div class=\'mono text-xs text-center p-4\' style=\'color:rgba(255,255,255,0.3)\'>uiu-logo.png<br><span style=\'color:var(--amber)\'>Drop your file here</span></div>'">
+                    </div>
+                    <div class="card-info">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <h3 class="condensed text-lg font-bold tracking-wide text-white">UIU LOGO</h3>
+                            <div class="flex gap-1">
+                                <span class="format-badge badge-png">PNG</span>
+                            </div>
+                        </div>
+                        <p class="mono text-xs mb-3" style="color:rgba(255,255,255,0.45)">uiu-logo.png</p>
+                        <p class="text-sm" style="color:rgba(255,255,255,0.6)">United International University institutional logo for co-branded academic materials.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="images/uiu-logo.png" download="UIU_Logo.png" class="btn-download">
+                            <i data-feather="download" class="w-3 h-3"></i> Download PNG
+                        </a>
+                        <span class="mono text-xs" style="color:rgba(255,255,255,0.3)">PNG</span>
+                    </div>
+                </div>
+
+                <!-- CAIR Logo -->
+                <div class="asset-card" data-formats="png" data-category="marks partners">
+                    <div class="bg-toggle-group">
+                        <span class="mono text-xs mr-1" style="color:rgba(255,255,255,0.35)">BG:</span>
+                        <button class="bg-toggle-btn dark active"  onclick="setBg(this,'dark-bg')"    data-target="mark-3"></button>
+                        <button class="bg-toggle-btn mid"          onclick="setBg(this,'mid-bg')"     data-target="mark-3"></button>
+                        <button class="bg-toggle-btn white"        onclick="setBg(this,'white-bg')"   data-target="mark-3"></button>
+                        <button class="bg-toggle-btn check"        onclick="setBg(this,'checker-bg')" data-target="mark-3"></button>
+                    </div>
+                    <div class="logo-preview dark-bg" id="mark-3">
+                        <img src="images/cair-logo.png" alt="CAIR Logo"
+                             style="filter:brightness(0) invert(1)"
+                             onerror="this.src='';this.style.display='none';this.parentElement.innerHTML+='<div class=\'mono text-xs text-center p-4\' style=\'color:rgba(255,255,255,0.3)\'>cair-logo.png<br><span style=\'color:var(--amber)\'>Drop your file here</span></div>'">
+                    </div>
+                    <div class="card-info">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <h3 class="condensed text-lg font-bold tracking-wide text-white">CAIR LOGO</h3>
+                            <span class="format-badge badge-png">PNG</span>
+                        </div>
+                        <p class="mono text-xs mb-3" style="color:rgba(255,255,255,0.45)">cair-logo.png</p>
+                        <p class="text-sm" style="color:rgba(255,255,255,0.6)">Center for AI Research logo for research papers and technical documentation.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="images/cair-logo.png" download="CAIR_Logo.png" class="btn-download">
+                            <i data-feather="download" class="w-3 h-3"></i> Download PNG
+                        </a>
+                        <span class="mono text-xs" style="color:rgba(255,255,255,0.3)">PNG</span>
+                    </div>
+                </div>
+
+              
+
+            </div>
+        </div>
+
+        <!-- ============================================
+             CATEGORY: PARTNER LOGOS
+             ============================================ -->
+        <div class="mb-20 asset-group" data-category="partners" data-aos="fade-up">
+            <div class="category-header">
+                <div>
+                    <div class="mono text-xs mb-1" style="color:var(--amber)">// 03</div>
+                    <h2 class="text-4xl gradient-text">PARTNER LOGOS</h2>
+                </div>
+                <span class="tag" style="background:rgba(20,184,166,0.1);border:1px solid rgba(20,184,166,0.3);color:var(--accent-teal)">R&amp;D PARTNERS</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="partners-grid">
+
+                <!-- SolidWorks -->
+                <div class="asset-card" data-formats="png" data-category="partners">
+                    <div class="bg-toggle-group">
+                        <span class="mono text-xs mr-1" style="color:rgba(255,255,255,0.35)">BG:</span>
+                        <button class="bg-toggle-btn dark active"  onclick="setBg(this,'dark-bg')"    data-target="p-1"></button>
+                        <button class="bg-toggle-btn mid"          onclick="setBg(this,'mid-bg')"     data-target="p-1"></button>
+                        <button class="bg-toggle-btn white"        onclick="setBg(this,'white-bg')"   data-target="p-1"></button>
+                        <button class="bg-toggle-btn check"        onclick="setBg(this,'checker-bg')" data-target="p-1"></button>
+                    </div>
+                    <div class="logo-preview dark-bg" id="p-1">
+                        <img src="images/solidworks-logo.png" alt="SolidWorks Logo"
+                             style="filter:brightness(0) invert(1)"
+                             onerror="this.src='';this.style.display='none';this.parentElement.innerHTML+='<div class=\'mono text-xs text-center p-4\' style=\'color:rgba(255,255,255,0.3)\'>solidworks-logo.png<br><span style=\'color:var(--amber)\'>Drop your file here</span></div>'">
+                    </div>
+                    <div class="card-info">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <h3 class="condensed text-lg font-bold tracking-wide text-white">SOLIDWORKS</h3>
+                            <span class="format-badge badge-png">PNG</span>
+                        </div>
+                        <p class="mono text-xs mb-3" style="color:rgba(255,255,255,0.45)">solidworks-logo.png</p>
+                        <p class="text-sm" style="color:rgba(255,255,255,0.6)">SolidWorks R&amp;D partner logo for engineering documentation and technical papers.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="images/solidworks-logo.png" download="SolidWorks_Logo.png" class="btn-download">
+                            <i data-feather="download" class="w-3 h-3"></i> Download PNG
+                        </a>
+                        <span class="mono text-xs" style="color:rgba(255,255,255,0.3)">PNG</span>
+                    </div>
+                </div>
+
+                <!-- Protospace -->
+                <div class="asset-card" data-formats="png" data-category="partners">
+                    <div class="bg-toggle-group">
+                        <span class="mono text-xs mr-1" style="color:rgba(255,255,255,0.35)">BG:</span>
+                        <button class="bg-toggle-btn dark active"  onclick="setBg(this,'dark-bg')"    data-target="p-2"></button>
+                        <button class="bg-toggle-btn mid"          onclick="setBg(this,'mid-bg')"     data-target="p-2"></button>
+                        <button class="bg-toggle-btn white"        onclick="setBg(this,'white-bg')"   data-target="p-2"></button>
+                        <button class="bg-toggle-btn check"        onclick="setBg(this,'checker-bg')" data-target="p-2"></button>
+                    </div>
+                    <div class="logo-preview dark-bg" id="p-2">
+                        <img src="images/protospace-logo.png" alt="Protospace Logo"
+                             style="filter:brightness(0) invert(1)"
+                             onerror="this.src='';this.style.display='none';this.parentElement.innerHTML+='<div class=\'mono text-xs text-center p-4\' style=\'color:rgba(255,255,255,0.3)\'>protospace-logo.png<br><span style=\'color:var(--amber)\'>Drop your file here</span></div>'">
+                    </div>
+                    <div class="card-info">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <h3 class="condensed text-lg font-bold tracking-wide text-white">PROTOSPACE</h3>
+                            <span class="format-badge badge-png">PNG</span>
+                        </div>
+                        <p class="mono text-xs mb-3" style="color:rgba(255,255,255,0.45)">protospace-logo.png</p>
+                        <p class="text-sm" style="color:rgba(255,255,255,0.6)">Manufacturing and hardware partner logo for fabrication project references.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="images/protospace-logo.png" download="Protospace_Logo.png" class="btn-download">
+                            <i data-feather="download" class="w-3 h-3"></i> Download PNG
+                        </a>
+                        <span class="mono text-xs" style="color:rgba(255,255,255,0.3)">PNG</span>
+                    </div>
+                </div>
+
+                <!-- Dassault Systèmes -->
+                <div class="asset-card" data-formats="png" data-category="partners">
+                    <div class="bg-toggle-group">
+                        <span class="mono text-xs mr-1" style="color:rgba(255,255,255,0.35)">BG:</span>
+                        <button class="bg-toggle-btn dark active"  onclick="setBg(this,'dark-bg')"    data-target="p-3"></button>
+                        <button class="bg-toggle-btn mid"          onclick="setBg(this,'mid-bg')"     data-target="p-3"></button>
+                        <button class="bg-toggle-btn white"        onclick="setBg(this,'white-bg')"   data-target="p-3"></button>
+                        <button class="bg-toggle-btn check"        onclick="setBg(this,'checker-bg')" data-target="p-3"></button>
+                    </div>
+                    <div class="logo-preview dark-bg" id="p-3">
+                        <img src="images/Dassauly-systemes-logo.png" alt="Dassault Systèmes"
+                             style="filter:brightness(0) invert(1)"
+                             onerror="this.src='';this.style.display='none';this.parentElement.innerHTML+='<div class=\'mono text-xs text-center p-4\' style=\'color:rgba(255,255,255,0.3)\'>Dassauly-systemes-logo.png<br><span style=\'color:var(--amber)\'>Drop your file here</span></div>'">
+                    </div>
+                    <div class="card-info">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <h3 class="condensed text-lg font-bold tracking-wide text-white">DASSAULT SYSTÈMES</h3>
+                            <span class="format-badge badge-png">PNG</span>
+                        </div>
+                        <p class="mono text-xs mb-3" style="color:rgba(255,255,255,0.45)">Dassauly-systemes-logo.png</p>
+                        <p class="text-sm" style="color:rgba(255,255,255,0.6)">3D experience platform partner for CAD and simulation tooling references.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="images/Dassauly-systemes-logo.png" download="Dassault_Systemes_Logo.png" class="btn-download">
+                            <i data-feather="download" class="w-3 h-3"></i> Download PNG
+                        </a>
+                        <span class="mono text-xs" style="color:rgba(255,255,255,0.3)">PNG</span>
+                    </div>
+                </div>
+
+                <!-- DFRobot -->
+                <div class="asset-card" data-formats="png" data-category="partners">
+                    <div class="bg-toggle-group">
+                        <span class="mono text-xs mr-1" style="color:rgba(255,255,255,0.35)">BG:</span>
+                        <button class="bg-toggle-btn dark active"  onclick="setBg(this,'dark-bg')"    data-target="p-4"></button>
+                        <button class="bg-toggle-btn mid"          onclick="setBg(this,'mid-bg')"     data-target="p-4"></button>
+                        <button class="bg-toggle-btn white"        onclick="setBg(this,'white-bg')"   data-target="p-4"></button>
+                        <button class="bg-toggle-btn check"        onclick="setBg(this,'checker-bg')" data-target="p-4"></button>
+                    </div>
+                    <div class="logo-preview dark-bg" id="p-4">
+                        <img src="images/DFRobot-logo.png" alt="DFRobot Logo"
+                             style="filter:brightness(0) invert(1)"
+                             onerror="this.src='';this.style.display='none';this.parentElement.innerHTML+='<div class=\'mono text-xs text-center p-4\' style=\'color:rgba(255,255,255,0.3)\'>DFRobot-logo.png<br><span style=\'color:var(--amber)\'>Drop your file here</span></div>'">
+                    </div>
+                    <div class="card-info">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <h3 class="condensed text-lg font-bold tracking-wide text-white">DFROBOT</h3>
+                            <span class="format-badge badge-png">PNG</span>
+                        </div>
+                        <p class="mono text-xs mb-3" style="color:rgba(255,255,255,0.45)">DFRobot-logo.png</p>
+                        <p class="text-sm" style="color:rgba(255,255,255,0.6)">Hardware and electronics partner logo for robotics component documentation.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="images/DFRobot-logo.png" download="DFRobot_Logo.png" class="btn-download">
+                            <i data-feather="download" class="w-3 h-3"></i> Download PNG
+                        </a>
+                        <span class="mono text-xs" style="color:rgba(255,255,255,0.3)">PNG</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+      
+               
+
+               
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<!-- ================================================
+     CONTACT CTA
+     ================================================ -->
+<section class="py-16 px-4 sm:px-6 lg:px-8 relative z-10" style="background:var(--bg-deep);border-top:1px solid var(--steel-light)">
+    <div class="max-w-7xl mx-auto text-center" data-aos="fade-up">
+        <div class="hazard h-1 w-24 mx-auto mb-8 opacity-60"></div>
+        <h2 class="text-4xl md:text-5xl mb-4 gradient-text">NEED A CUSTOM FORMAT?</h2>
+        <p class="max-w-2xl mx-auto mb-8" style="color:rgba(255,255,255,0.55)">If you need a specific file format, resolution, or colour variant not listed here, reach out to the team and we'll get it sorted.</p>
+        <a href="mailto:rescuerover@cair.uiu.ac.bd" class="btn-primary inline-flex items-center gap-2">
+            <i data-feather="mail" class="w-4 h-4"></i>
+            rescuerover@cair.uiu.ac.bd
+        </a>
+    </div>
+</section>
+
+<!-- ================================================
+     FOOTER
+     ================================================ -->
+<footer style="background:var(--bg-deep);border-top:1px solid var(--steel-light)" class="py-8 px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="hazard h-1 mb-8 opacity-60"></div>
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex gap-5">
+                <a href="https://www.facebook.com/share/1FaSe57Vd5/" style="color:rgba(255,255,255,0.4)" class="transition-colors" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'"><i data-feather="facebook" class="w-5 h-5"></i></a>
+                <a href="https://www.instagram.com/uiurescuerover" style="color:rgba(255,255,255,0.4)" class="transition-colors" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'"><i data-feather="instagram" class="w-5 h-5"></i></a>
+                <a href="#" style="color:rgba(255,255,255,0.4)" class="transition-colors" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'"><i data-feather="linkedin" class="w-5 h-5"></i></a>
+                <a href="#" style="color:rgba(255,255,255,0.4)" class="transition-colors" onmouseover="this.style.color='var(--amber)'" onmouseout="this.style.color='rgba(255,255,255,0.4)'"><i data-feather="youtube" class="w-5 h-5"></i></a>
+            </div>
+            <p class="mono text-xs" style="color:rgba(255,255,255,0.25)">&copy; 2026 URRT – UIU Rescue Rover Team. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- TOAST -->
+<div id="toast">
+    <i data-feather="check-circle" class="w-4 h-4" style="color:var(--accent-teal)"></i>
+    <span class="condensed font-bold tracking-wider text-sm" style="color:var(--white)" id="toast-msg">Download started</span>
+</div>
+
+<!-- ================================================
+     SCRIPTS
+     ================================================ -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
+    if (typeof feather !== 'undefined') feather.replace();
+
+    // Mobile menu
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Count real assets
+    const realCards = document.querySelectorAll('.asset-card:not(.empty-slot)');
+    document.getElementById('total-assets').textContent = realCards.length;
+
+    // Download tracking — show toast
+    document.querySelectorAll('.btn-download').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const filename = this.getAttribute('download') || 'file';
+            showToast('Downloading ' + filename);
+        });
+    });
+});
+
+/* ---- BG TOGGLE ---- */
+function setBg(btn, bgClass) {
+    const targetId = btn.getAttribute('data-target');
+    const preview = document.getElementById(targetId);
+    if (!preview) return;
+
+    // Remove all bg classes
+    ['dark-bg','mid-bg','white-bg','steel-bg','checker-bg'].forEach(c => preview.classList.remove(c));
+    preview.classList.add(bgClass);
+
+    // Update active state on sibling buttons
+    const siblings = btn.parentElement.querySelectorAll('.bg-toggle-btn');
+    siblings.forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Auto-invert images on white bg
+    const img = preview.querySelector('img');
+    if (img) {
+        if (bgClass === 'white-bg') {
+            img.style.filter = img.dataset.originalFilter ? '' : '';
+            // If the image naturally needs inversion on dark bg, restore it on white
+        }
+    }
+}
+
+/* ---- FILTER ---- */
+function filterAssets(btn, filter) {
+    // Update filter buttons
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const cards = document.querySelectorAll('.asset-card');
+    cards.forEach(card => {
+        if (filter === 'all') {
+            card.style.display = '';
+            return;
+        }
+        const cat = (card.getAttribute('data-category') || '').toLowerCase();
+        const fmt = (card.getAttribute('data-formats') || '').toLowerCase();
+        const matches = cat.includes(filter) || fmt.includes(filter);
+        card.style.display = matches ? '' : 'none';
+    });
+
+    // Also hide/show group headers if all cards in a group are hidden
+    document.querySelectorAll('.asset-group').forEach(group => {
+        const visible = group.querySelectorAll('.asset-card:not([style*="display: none"])');
+        group.style.display = visible.length === 0 ? 'none' : '';
+    });
+}
+
+/* ---- TOAST ---- */
+function showToast(msg) {
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-msg');
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    if (typeof feather !== 'undefined') feather.replace();
+    setTimeout(() => toast.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>

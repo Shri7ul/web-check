@@ -1,0 +1,160 @@
+URRT — Brand Assets
+Projects
+Advisors
+Team
+Gears
+Qualification Video
+Assets
+Contact
+Join Us
+Sponsor
+Projects
+Advisors
+Team
+Gears
+Qualification Video
+Assets
+Contact
+Join Us
+Become Sponsor
+HOME
+BRAND ASSETS
+Official Resources
+BRAND
+ASSETS
+Official logos, marks, and visual identity files for the UIU Rescue Rover Team.
+Download in your preferred format for press, academic, or partnership use.
+// ASSET REGISTRY
+TOTAL FILES
+CATEGORIES
+LIVE
+STATUS
+FILTER:
+All Files
+Logos
+Team Marks
+Partner Logos
+PNG
+SVG
+// PERMITTED USE
+Press and media coverage of URRT activities
+Academic publications and conference papers
+Official partner and sponsor materials
+Team member portfolios and presentations
+// NOT PERMITTED
+Modifying colors, proportions, or typography
+Using logos on competing or unrelated products
+Commercial use without written permission
+Placing logos on busy backgrounds without approval
+// 01
+TEAM LOGOS
+PRIMARY MARKS
+BG:
+umrt_logo.png
+Drop your file here
+'">
+URRT MAIN LOGO
+PNG
+umrt_logo.png
+Primary circular team emblem. Use for official documents, social media profiles, and merchandise.
+BG:
+urrt_text.png
+Drop your file here
+'">
+URRT TEXT WORDMARK
+PNG
+urrt_text.png
+Horizontal wordmark for use in navigation bars, banners, and co-branding scenarios.
+Download PNG
+PNG
+BG:
+aboutuslogo.png
+Drop your file here
+'">
+URRT ABOUT LOGO
+PNG
+aboutuslogo.png
+Secondary emblem variant used in about and contact sections.
+Download PNG
+PNG
+// 02
+TEAM MARKS
+ICONS & EMBLEMS
+BG:
+robot.png
+Drop your file here
+'">
+ROBOT ICON MARK
+PNG
+robot.png
+Competition and event graphic for RoboCup references and promotional material.
+Download PNG
+PNG
+BG:
+uiu-logo.png
+Drop your file here
+'">
+UIU LOGO
+PNG
+uiu-logo.png
+United International University institutional logo for co-branded academic materials.
+Download PNG
+PNG
+BG:
+cair-logo.png
+Drop your file here
+'">
+CAIR LOGO
+PNG
+cair-logo.png
+Center for AI Research logo for research papers and technical documentation.
+Download PNG
+PNG
+// 03
+PARTNER LOGOS
+R&D PARTNERS
+BG:
+solidworks-logo.png
+Drop your file here
+'">
+SOLIDWORKS
+PNG
+solidworks-logo.png
+SolidWorks R&D partner logo for engineering documentation and technical papers.
+Download PNG
+PNG
+BG:
+protospace-logo.png
+Drop your file here
+'">
+PROTOSPACE
+PNG
+protospace-logo.png
+Manufacturing and hardware partner logo for fabrication project references.
+Download PNG
+PNG
+BG:
+Dassauly-systemes-logo.png
+Drop your file here
+'">
+DASSAULT SYSTÈMES
+PNG
+Dassauly-systemes-logo.png
+3D experience platform partner for CAD and simulation tooling references.
+Download PNG
+PNG
+BG:
+DFRobot-logo.png
+Drop your file here
+'">
+DFROBOT
+PNG
+DFRobot-logo.png
+Hardware and electronics partner logo for robotics component documentation.
+Download PNG
+PNG
+NEED A CUSTOM FORMAT?
+If you need a specific file format, resolution, or colour variant not listed here, reach out to the team and we'll get it sorted.
+rescuerover@cair.uiu.ac.bd
+© 2026 URRT – UIU Rescue Rover Team. All rights reserved.
+Download started

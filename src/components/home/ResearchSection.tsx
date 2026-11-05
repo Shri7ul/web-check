@@ -1,44 +1,84 @@
 import Link from "next/link";
-import { researchTopics } from "@/content/research";
-import { experimentsDisclosure } from "@/content/experiments";
-import { SceneHead } from "@/components/ui/SceneHead";
+import { SectionHead } from "./SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
+import { evidenceItems, experimentsDisclosure } from "@/content/experiments";
+
+/** Scene 06 — RESEARCH & EXPERIMENTS. A small number of honest highlights. */
+const highlights = [
+  {
+    slug: "terrain-traversal-testing",
+    image: "/assets/rovers/t1.jpeg",
+    alt: "AEGIS tracked UGV on a wooden stair-and-rubble test course",
+    label: "Evidence 01",
+    title: "Terrain traversal testing",
+    purpose: "Can the tracked, flipper-equipped platform cross stairs, ramps and rubble-profile terrain?",
+    result: "Photographs confirm a test course exists. No speed, gradeability or success-rate figures are published.",
+  },
+  {
+    slug: "qualification-video-2026",
+    image: "/assets/rovers/t3.jpeg",
+    alt: "AEGIS climbing a wooden staircase during testing",
+    label: "Evidence 02",
+    title: "RoboCup 2026 qualification video",
+    purpose: "Does the platform demonstrate the capabilities required for competition entry?",
+    result: "An official 28:59 video submission exists. No numeric outcome or test protocol is published.",
+  },
+  {
+    slug: "zugbee-x1-specification",
+    image: "/assets/rovers/prototype-x1.jpeg",
+    alt: "The red-and-white Zugbee X1 rover outdoors on grass",
+    label: "Evidence 03",
+    title: "Zugbee X1 (V1) specification",
+    purpose: "What did the first prototype actually consist of?",
+    result: "Completed January 2025: 4-wheel drive, basic end-effector, camera and ultrasonic sensors. No performance figures published.",
+  },
+];
+
+const bySlug = new Map(evidenceItems.map((e) => [e.slug, e]));
 
 export function ResearchSection() {
   return (
-    <section id="research" className="s-scene s-scene--light" aria-labelledby="research-title">
-      <div className="l-wrap">
+    <section id="research" className="n-section" aria-labelledby="research-title">
+      <div className="n-wrap">
         <span id="research-title" className="u-sr-only">Research and experiments</span>
-        <div className="l-between u-mb">
-          <SceneHead
-            index="07"
-            eyebrow="RESEARCH & EXPERIMENTS"
-            title={<>What we are<br />learning to <span className="u-serif-accent">build.</span></>}
-            intro="URRT's documented engineering focus areas, and an honest account of what has — and has not — been measured."
-          />
-          <Link href="/research" className="c-link u-hide-mobile">Explore research <span aria-hidden="true">↗</span></Link>
+        <SectionHead
+          index="06"
+          eyebrow="Research & Experiments"
+          title={<>What we are <em>learning to build.</em></>}
+          intro="Real artefacts, honest summaries. Nothing here is measured unless URRT published it."
+        />
+
+        <div className="n-research__grid">
+          {highlights.map((h, i) => {
+            const item = bySlug.get(h.slug);
+            return (
+              <Reveal key={h.slug} delay={i * 80} className="n-exp">
+                <div className="n-exp__media">
+                  <img src={h.image} alt={h.alt} loading="lazy" />
+                </div>
+                <div className="n-exp__kicker">{h.label}</div>
+                <h3>{h.title}</h3>
+                <p className="n-exp__purpose">{h.purpose}</p>
+                <div className="n-exp__result">
+                  <b>Verified result summary</b>
+                  {h.result}
+                </div>
+                {item && (
+                  <Link className="n-link n-exp__link" href={`/experiments/${h.slug}`}>
+                    Open the record <span aria-hidden="true">↗</span>
+                  </Link>
+                )}
+              </Reveal>
+            );
+          })}
         </div>
 
-        <div className="l-grid l-3 l-gap">
-          {researchTopics.slice(0, 3).map((t, i) => (
-            <Reveal key={t.slug} delay={i * 80} className="rs-card">
-              <Link href={`/research/${t.slug}`} className="rs-card__link">
-                <div className="t-mono u-muted u-mb-s">R_{t.index} / {t.area}</div>
-                <h3 className="t-h3 u-mb-s">{t.title}</h3>
-                <p className="t-small u-muted u-mb">{t.question}</p>
-                <div className="rs-card__foot t-mono">{t.status}</div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal className="rs-disclosure u-mt">
-          <div className="c-label u-mb-s">Evidence policy</div>
-          <p className="t-body u-max-70">{experimentsDisclosure.headline}. {experimentsDisclosure.body}</p>
-          <div className="u-mt-s l-between" style={{ flexWrap: "wrap", gap: "16px" }}>
-            <Link href="/experiments" className="c-link">Open experiment explorer <span aria-hidden="true">↗</span></Link>
-            <span className="t-mono u-muted">No fabricated datasets · no invented charts</span>
-          </div>
+        <Reveal className="n-research__note" delay={80}>
+          <p style={{ maxWidth: "64ch" }}>
+            <strong style={{ color: "var(--n-graphite)" }}>{experimentsDisclosure.headline}.</strong>{" "}
+            {experimentsDisclosure.body}
+          </p>
+          <Link className="n-link" href="/experiments">Browse the evidence explorer <span aria-hidden="true">↗</span></Link>
         </Reveal>
       </div>
     </section>

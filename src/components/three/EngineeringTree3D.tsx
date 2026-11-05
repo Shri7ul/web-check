@@ -41,14 +41,16 @@ function computePositions(index: TreeIndex): Map<string, THREE.Vector3> {
   return pos;
 }
 
+/* Neutral graphite / stone palette. Rescue orange is reserved for the
+   single active (hover / selected / matched) accent — see applyVisuals. */
 const NODE_STYLE: Record<string, { radius: number; color: number; emissive: number }> = {
-  root: { radius: 0.85, color: 0xb7f36b, emissive: 0x244a35 },
-  subteam: { radius: 0.52, color: 0x86ac93, emissive: 0x14201c },
-  group: { radius: 0.46, color: 0x5c7a66, emissive: 0x14201c },
-  member: { radius: 0.24, color: 0xaebfb2, emissive: 0x14201c },
-  role: { radius: 0.32, color: 0xdce5d7, emissive: 0x14201c },
-  project: { radius: 0.4, color: 0x94c951, emissive: 0x244a35 },
-  discipline: { radius: 0.28, color: 0x6e8b77, emissive: 0x14201c },
+  root: { radius: 0.85, color: 0x191C1A, emissive: 0x000000 },
+  subteam: { radius: 0.52, color: 0x4A514C, emissive: 0x000000 },
+  group: { radius: 0.46, color: 0x5C635D, emissive: 0x000000 },
+  member: { radius: 0.24, color: 0x9AA199, emissive: 0x000000 },
+  role: { radius: 0.32, color: 0xC9CCC5, emissive: 0x000000 },
+  project: { radius: 0.4, color: 0x8A9189, emissive: 0x000000 },
+  discipline: { radius: 0.28, color: 0xAEB3AB, emissive: 0x000000 },
 };
 
 interface EdgeObj {
@@ -145,40 +147,29 @@ export default function EngineeringTree3D({
       const positions = computePositions(index);
 
       const scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x0b1112, 0.012);
+      scene.background = new THREE.Color(0xFBFBF8);
       const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 200);
       const HOME_POS = new THREE.Vector3(0, 5.5, 30);
       const HOME_TARGET = new THREE.Vector3(0, 1.5, 0);
       camera.position.copy(HOME_POS);
       camera.lookAt(HOME_TARGET);
 
-      // Lights (restrained, dark).
-      scene.add(new THREE.AmbientLight(0x4a5c50, 1.1));
-      const key = new THREE.DirectionalLight(0xdce5d7, 0.9);
+      // Neutral lighting on a clean light stage. No fog, no particles,
+      // no coloured rim light — the orange accent is the only highlight.
+      scene.add(new THREE.AmbientLight(0xffffff, 1.5));
+      const key = new THREE.DirectionalLight(0xffffff, 0.85);
       key.position.set(8, 16, 12);
       scene.add(key);
-      const rim = new THREE.PointLight(0xb7f36b, 0.7, 60);
-      rim.position.set(0, -2, 0);
-      scene.add(rim);
-
-      // Background particles.
-      const pCount = lowPower ? 60 : 150;
-      const pPos = new Float32Array(pCount * 3);
-      for (let i = 0; i < pCount; i++) {
-        pPos.set([(Math.random() - 0.5) * 50, (Math.random() - 0.5) * 34, (Math.random() - 0.5) * 44 - 8], i * 3);
-      }
-      const pGeo = new THREE.BufferGeometry();
-      pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
-      const pMat = new THREE.PointsMaterial({ color: 0x5c7a66, size: 0.07, transparent: true, opacity: 0.4, depthWrite: false });
-      const particles = new THREE.Points(pGeo, pMat);
-      scene.add(particles);
+      const fill = new THREE.DirectionalLight(0xEDECE6, 0.4);
+      fill.position.set(-10, 4, -8);
+      scene.add(fill);
 
       // --- Nodes -------------------------------------------------------
       const nodeMeshes: THREE.Mesh[] = [];
       const meshById = new Map<string, THREE.Mesh>();
       const halo = new THREE.Mesh(
         new THREE.SphereGeometry(1, 20, 20),
-        new THREE.MeshBasicMaterial({ color: 0xb7f36b, transparent: true, opacity: 0.12, side: THREE.BackSide, depthWrite: false }),
+        new THREE.MeshBasicMaterial({ color: 0xE56B3F, transparent: true, opacity: 0.16, side: THREE.BackSide, depthWrite: false }),
       );
       halo.visible = false;
       scene.add(halo);
@@ -222,7 +213,7 @@ export default function EngineeringTree3D({
         if (e.kind === "hierarchy") {
           const tube = new THREE.Mesh(
             new THREE.TubeGeometry(curve, 22, 0.028, 6, false),
-            new THREE.MeshBasicMaterial({ color: 0x3d5a48, transparent: true, opacity: 0.6 }),
+            new THREE.MeshBasicMaterial({ color: 0x9AA199, transparent: true, opacity: 0.75 }),
           );
           scene.add(tube);
           edgeObjs.push({ obj: tube as unknown as EdgeObj["obj"], kind: e.kind, from: e.from, to: e.to, baseOpacity: 0.6 });
@@ -230,7 +221,7 @@ export default function EngineeringTree3D({
           const geo = new THREE.BufferGeometry().setFromPoints(curve.getPoints(24));
           const line = new THREE.Line(
             geo,
-            new THREE.LineDashedMaterial({ color: 0xb7f36b, transparent: true, opacity: 0.2, dashSize: 0.35, gapSize: 0.28 }),
+            new THREE.LineDashedMaterial({ color: 0x8A9189, transparent: true, opacity: 0.45, dashSize: 0.35, gapSize: 0.28 }),
           );
           line.computeLineDistances();
           scene.add(line);
@@ -239,7 +230,7 @@ export default function EngineeringTree3D({
           const geo = new THREE.BufferGeometry().setFromPoints(curve.getPoints(24));
           const line = new THREE.Line(
             geo,
-            new THREE.LineBasicMaterial({ color: 0xdce5d7, transparent: true, opacity: 0.55 }),
+            new THREE.LineBasicMaterial({ color: 0xB9BBB3, transparent: true, opacity: 0.6 }),
           );
           scene.add(line);
           edgeObjs.push({ obj: line as unknown as EdgeObj["obj"], kind: e.kind, from: e.from, to: e.to, baseOpacity: 0.55 });
@@ -325,7 +316,7 @@ export default function EngineeringTree3D({
           mat.opacity = opacity;
           mat.emissiveIntensity = id === ctrl.selected ? 1.1 : ctrl.matches.has(id) ? 0.9 : 0.45;
           (mesh.material as THREE.MeshStandardMaterial).emissive.setHex(
-            id === ctrl.selected || ctrl.matches.has(id) ? 0x4a7a2c : mesh.userData.style.emissive,
+            id === ctrl.selected || ctrl.matches.has(id) ? 0xE56B3F : mesh.userData.style.emissive,
           );
           label.style.display = hidden || !showLabel ? "none" : "block";
           label.classList.toggle("is-match", ctrl.matches.has(id));
@@ -436,7 +427,7 @@ export default function EngineeringTree3D({
       const sceneModule = {
         scene,
         camera,
-        update: (_dt: number, t: number) => {
+        update: () => {
           if (tween?.active) {
             tween.t = Math.min(1, tween.t + 0.035);
             const e = 1 - Math.pow(1 - tween.t, 3);
@@ -447,7 +438,6 @@ export default function EngineeringTree3D({
           } else if (!reduced) {
             controls.update();
           }
-          if (!reduced) particles.rotation.y = t * 0.01;
           updateLabels();
         },
         resize: () => {},

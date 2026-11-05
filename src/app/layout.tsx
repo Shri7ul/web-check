@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import "./experience.css";
 import "./pages.css";
+import "./redesign.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { site } from "@/content/site";
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0B1112",
+  themeColor: "#F5F4EF",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

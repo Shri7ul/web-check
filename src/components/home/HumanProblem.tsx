@@ -3,72 +3,75 @@
 import Link from "next/link";
 import { useState } from "react";
 import { challenges } from "@/content/challenges";
-import { SceneHead } from "@/components/ui/SceneHead";
+import { SectionHead } from "./SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
 
+const three = challenges.slice(0, 3);
+
+const subsystemLabels: Record<string, string> = {
+  mechanical: "mechanical structure",
+  mobility: "mobility",
+  perception: "perception",
+  autonomy: "autonomy",
+  communication: "communication",
+};
+
+/** Scene 02 — THE PROBLEM. Three selectable visual challenges. */
 export function HumanProblem() {
   const [active, setActive] = useState(0);
-  const c = challenges[active];
+  const c = three[active];
 
   return (
-    <section id="human-problem" className="s-scene s-scene--forest" aria-labelledby="human-problem-title">
-      <div className="l-wrap">
-        <span id="human-problem-title" className="u-sr-only">The human problem</span>
-        <SceneHead
+    <section id="problem" className="n-section" aria-labelledby="problem-title">
+      <div className="n-wrap">
+        <span id="problem-title" className="u-sr-only">The problem</span>
+        <SectionHead
           index="02"
-          eyebrow="THE HUMAN PROBLEM"
-          title={<>Why rescue is <span className="u-serif-accent">hard.</span></>}
-          intro="A disaster site is hostile to people and to machines alike. Select a challenge to see how it translates into an engineering problem — and which subsystem answers it."
+          eyebrow="The Problem"
+          title={<>Why rescue is <em>hard.</em></>}
+          intro="Three conditions every rescue robot has to survive. Select one to see the machine answer it."
         />
 
-        <div className="hp-grid">
-          <Reveal className="hp-list" role="tablist" aria-label="Rescue challenges">
-            {challenges.map((item, i) => (
+        <div className="n-problem__grid">
+          <Reveal className="n-problem__tabs" role="tablist" aria-label="Rescue challenges">
+            {three.map((item, i) => (
               <button
                 key={item.id}
                 role="tab"
                 id={`ch-tab-${item.id}`}
                 aria-selected={i === active}
                 aria-controls="ch-panel"
-                className={`hp-item${i === active ? " is-active" : ""}`}
+                className={`n-problem__tab${i === active ? " is-active" : ""}`}
                 onClick={() => setActive(i)}
               >
-                <span className="hp-item__index t-mono">{item.index}</span>
-                <span className="hp-item__title t-h3">{item.title}</span>
-                <span className="hp-item__arrow" aria-hidden="true">→</span>
+                <span className="n-problem__tab__num">{item.index}</span>
+                <span className="n-problem__tab__title">{item.title}</span>
+                <span className="n-problem__tab__arrow" aria-hidden="true">→</span>
               </button>
             ))}
-            <p className="hp-list__note t-small u-muted-dark">
+            <p className="n-problem__note">
               These are the conditions rescue robotics must handle — not a claim of real disaster deployments.
             </p>
           </Reveal>
 
-          <Reveal className="hp-panel" delay={80}>
-            <div
-              id="ch-panel"
-              role="tabpanel"
-              aria-labelledby={`ch-tab-${c.id}`}
-              className="hp-visual"
-            >
-              <img key={c.image} src={c.image} alt={c.imageAlt} className="hp-visual__img" />
-              <div className="hp-visual__label t-mono">{c.imageLabel}</div>
-              <div className="hp-visual__index t-mono" aria-hidden="true">CH_0{active + 1}</div>
-            </div>
-
-            <div className="hp-copy" key={c.id}>
-              <div className="hp-copy__block">
-                <div className="c-label u-mb-s">The problem · in plain language</div>
-                <p className="t-body">{c.plain}</p>
+          <Reveal className="n-problem__view" delay={80}>
+            <div id="ch-panel" role="tabpanel" aria-labelledby={`ch-tab-${c.id}`}>
+              <div className="n-problem__media">
+                <img key={c.image} src={c.image} alt={c.imageAlt} className="n-problem__media__img" />
+                <span className="n-problem__media__idx n-num">CH_0{active + 1}</span>
+                <span className="n-problem__media__label">{c.imageLabel}</span>
               </div>
-              <div className="hp-copy__block hp-copy__block--accent">
-                <div className="c-label u-mb-s">The engineering challenge</div>
-                <p className="t-body">{c.engineering}</p>
+              <div className="n-problem__copy" key={c.id}>
+                <div>
+                  <span className="n-kicker">In plain language</span>
+                  <p className="n-problem__plain">{c.plain}</p>
+                </div>
+                {c.subsystemId && (
+                  <Link className="n-link n-problem__link" href={`/engineering#${c.subsystemId}`}>
+                    See the {subsystemLabels[c.subsystemId] ?? c.subsystemId} subsystem <span aria-hidden="true">↗</span>
+                  </Link>
+                )}
               </div>
-              {c.subsystemId && (
-                <Link href={`/engineering#${c.subsystemId}`} className="c-link">
-                  View the {c.subsystemId} subsystem <span aria-hidden="true">↗</span>
-                </Link>
-              )}
             </div>
           </Reveal>
         </div>

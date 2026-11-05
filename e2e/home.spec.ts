@@ -1,28 +1,29 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Homepage", () => {
-  test("renders the cinematic hero with an authentic rover photograph", async ({ page }) => {
+  test("renders the editorial hero with an authentic rover photograph", async ({ page }) => {
     await page.goto("/");
     const h1 = page.locator("h1#hero-title");
     await expect(h1).toBeVisible();
-    await expect(h1).toContainText("engineer a way in");
+    await expect(h1).toContainText("a way in");
 
-    const heroImg = page.locator(".s-hero__media img");
+    const heroImg = page.locator(".n-hero__right img");
     await expect(heroImg).toHaveJSProperty("complete", true);
     const naturalWidth = await heroImg.evaluate((el: HTMLImageElement) => el.naturalWidth);
     expect(naturalWidth).toBeGreaterThan(0);
   });
 
-  test("assembles the ten-scene narrative in order", async ({ page }) => {
+  test("assembles the visual story in order, without a tree on the homepage", async ({ page }) => {
     await page.goto("/");
-    const ids = ["human-problem", "machines", "inside", "build", "engineering-tree", "research", "journey", "join"];
+    const ids = ["problem", "robots", "how-it-works", "process", "research", "people", "journey", "join"];
     for (const id of ids) {
       await expect(page.locator(`#${id}`), `missing scene #${id}`).toHaveCount(1);
     }
-    await expect(page.locator("footer.c-footer")).toHaveCount(1);
+    await expect(page.locator("footer.n-footer")).toHaveCount(1);
+    await expect(page.locator("#engineering-tree")).toHaveCount(0);
 
     const order = await page.evaluate(() =>
-      ["human-problem", "machines", "inside", "build", "engineering-tree", "research", "journey", "join"]
+      ["problem", "robots", "how-it-works", "process", "research", "people", "journey", "join"]
         .map((id) => ({ id, top: document.getElementById(id)?.getBoundingClientRect().top ?? 0 })),
     );
     const tops = order.map((o) => o.top);
@@ -73,7 +74,7 @@ test.describe("Homepage", () => {
 
 test.describe("Responsive layout", () => {
   const paths = [
-    "/", "/robots", "/robots/aegis", "/engineering", "/people", "/research",
+    "/", "/robots", "/robots/aegis", "/engineering", "/engineering-tree", "/people", "/research",
     "/research/autonomous-navigation", "/experiments", "/experiments/qualification-video-2026",
     "/journey", "/resources", "/join", "/collaborate", "/contact",
   ];

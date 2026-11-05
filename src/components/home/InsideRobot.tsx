@@ -1,141 +1,184 @@
 "use client";
 
-import Link from "next/link";
-import { useRef, useState } from "react";
-import { documentedSubsystems } from "@/content/documentedSubsystems";
-import { SceneHead } from "@/components/ui/SceneHead";
+import { useState } from "react";
+import { SectionHead } from "./SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
 
-const HOTSPOTS = [
-  { id: "mechanical", x: 44, y: 32, label: "Arm / Structure" },
-  { id: "perception", x: 57, y: 55, label: "Perception" },
-  { id: "mobility", x: 32, y: 74, label: "Tracks / Flippers" },
-] as const;
+/**
+ * Scene 04 — HOW A ROBOT WORKS.
+ * Six selectable systems. Advanced detail is hidden behind an optional
+ * control. Where URRT publishes no built implementation, we say so.
+ */
+interface System {
+  id: string;
+  num: string;
+  name: string;
+  plain: string;
+  technical: string;
+  detail: string;
+  status: string;
+  published: boolean;
+}
+
+const systems: System[] = [
+  {
+    id: "mobility",
+    num: "01",
+    name: "Mobility",
+    plain: "Tracks and articulated flippers let the rover climb stairs, ramps and rubble instead of being stopped by them.",
+    technical:
+      "AEGIS uses continuous rubber tracks with articulated front and rear flippers to traverse stairs, rubble piles and extreme terrain profiles. Zugbee X1 used 4-wheel drive with basic mobility.",
+    detail: "Published as a core AEGIS sub-system and documented in official test-course photographs.",
+    status: "Published",
+    published: true,
+  },
+  {
+    id: "sensors",
+    num: "02",
+    name: "Sensors",
+    plain: "Instruments measure the space around the robot so it can act without a person standing next to it.",
+    technical:
+      "AEGIS integrates LiDAR, a depth (RGB-D) camera and an IMU. Zugbee X1 used a camera and ultrasonic sensors and established the sensor integration pipeline.",
+    detail: "Sensor models, ranges and calibration data are Not published.",
+    status: "Published · component classes only",
+    published: true,
+  },
+  {
+    id: "camera",
+    num: "03",
+    name: "Camera",
+    plain: "A depth camera gives the robot a view of what is in front of it, even when the room is dark or cluttered.",
+    technical:
+      "An RGB-D depth camera is listed among AEGIS's sensors and feeds a 360° spatial-awareness pipeline. Zugbee X1 carried a camera. No camera model, resolution or field of view is published.",
+    detail: "No camera specifications are published on the official site.",
+    status: "Published · component class only",
+    published: true,
+  },
+  {
+    id: "controller",
+    num: "04",
+    name: "Controller",
+    plain: "Electronics turn decisions into motor movement — the low-level logic between software and hardware.",
+    technical:
+      "Microcontroller / microprocessor work (Arduino, STM32, ESP32, Raspberry Pi, PlatformIO, MicroPython) and circuit / PCB design are listed as Electrical Sub-Team requirements. A specific built rover control implementation is not published.",
+    detail: "Control architecture, firmware and loop rates: Not published.",
+    status: "Not published",
+    published: false,
+  },
+  {
+    id: "power",
+    num: "05",
+    name: "Power",
+    plain: "Batteries and power management keep the robot running while it is away from an outlet.",
+    technical:
+      "Power system management is listed as an Electrical Sub-Team requirement in URRT recruitment material, but no built power subsystem for a specific rover is published.",
+    detail: "Battery chemistry, voltage, capacity and endurance: Not published.",
+    status: "Not published",
+    published: false,
+  },
+  {
+    id: "communication",
+    num: "06",
+    name: "Communication",
+    plain: "The link that carries commands out and video or telemetry back to the operators.",
+    technical:
+      "Remote operation, communication protocols, telemetry and RF systems are listed under the Aerial & Communication Sub-Team in recruitment material. A specific rover communication implementation is not published.",
+    detail: "Radio, range, protocol and bandwidth details: Not published.",
+    status: "Not published",
+    published: false,
+  },
+];
+
+/** Authentic component callouts over the official AEGIS photograph. */
+function Annotations() {
+  const marks = [
+    { x: 70, y: 38, tx: 118, ty: 24, label: "6-DOF arm" },
+    { x: 96, y: 60, tx: 122, ty: 60, label: "Perception" },
+    { x: 52, y: 92, tx: 48, ty: 106, label: "Tracks + flippers" },
+  ];
+  return (
+    <svg className="n-works__annot" viewBox="0 0 160 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      {marks.map((m) => {
+        const w = m.label.length * 2.1 + 6;
+        const rectX = m.tx > m.x ? m.tx : m.tx - w;
+        return (
+          <g key={m.label}>
+            <line x1={m.x} y1={m.y} x2={m.tx} y2={m.ty} stroke="#191C1A" strokeWidth="0.45" vectorEffect="non-scaling-stroke" />
+            <circle cx={m.x} cy={m.y} r="2.2" fill="#E56B3F" stroke="#FFFFFF" strokeWidth="0.8" />
+            <rect x={rectX} y={m.ty - 5} width={w} height="9" rx="1.5" fill="#191C1A" />
+            <text
+              x={rectX + w / 2}
+              y={m.ty + 1.1}
+              fill="#FFFFFF"
+              fontSize="3.4"
+              fontFamily="IBM Plex Mono, monospace"
+              letterSpacing="0.2"
+              textAnchor="middle"
+              dominantBaseline="middle"
+            >
+              {m.label}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
 
 export function InsideRobot() {
-  const [activeId, setActiveId] = useState<string>("mobility");
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const active = documentedSubsystems.find((s) => s.id === activeId) ?? documentedSubsystems[0];
-
-  const onTabKey = (e: React.KeyboardEvent, index: number) => {
-    if (!["ArrowRight", "ArrowLeft", "ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) return;
-    e.preventDefault();
-    let next = index;
-    if (e.key === "ArrowRight" || e.key === "ArrowDown") next = (index + 1) % documentedSubsystems.length;
-    if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = (index - 1 + documentedSubsystems.length) % documentedSubsystems.length;
-    if (e.key === "Home") next = 0;
-    if (e.key === "End") next = documentedSubsystems.length - 1;
-    setActiveId(documentedSubsystems[next].id);
-    tabRefs.current[next]?.focus();
-  };
+  const [active, setActive] = useState(0);
+  const s = systems[active];
 
   return (
-    <section id="inside" className="s-scene s-scene--dark" aria-labelledby="inside-title">
-      <div className="l-wrap">
-        <span id="inside-title" className="u-sr-only">Inside the robot</span>
-        <SceneHead
+    <section id="how-it-works" className="n-section" aria-labelledby="works-title">
+      <div className="n-wrap">
+        <span id="works-title" className="u-sr-only">How a robot works</span>
+        <SectionHead
           index="04"
-          eyebrow="INSIDE THE ROBOT"
-          title={<>Look closer.<br /><span className="u-serif-accent">Understand</span> the machine.</>}
-          intro="Select a subsystem to see what it does, how it works, what is actually published — and what is not. Only documented subsystems carry detail; the rest are labelled honestly."
+          eyebrow="How a Robot Works"
+          title={<>What&apos;s inside <em>the machine.</em></>}
+          intro="Six systems, one robot. Select a system to see what it does."
         />
 
-        <div className="ir-layout">
-          {/* Annotated rover */}
-          <Reveal className="ir-stage">
-            <div className="ir-stage__img">
-              <img
-                src="/assets/rovers/t1.jpeg"
-                alt="AEGIS tracked UGV on a wooden test course, with annotated subsystem hotspots"
-                loading="lazy"
-              />
-              {HOTSPOTS.map((h) => (
-                <button
-                  key={h.id}
-                  className={`ir-hotspot${activeId === h.id ? " is-active" : ""}`}
-                  style={{ left: `${h.x}%`, top: `${h.y}%` }}
-                  onClick={() => setActiveId(h.id)}
-                  aria-label={`Show ${h.label} subsystem`}
-                  aria-pressed={activeId === h.id}
-                >
-                  <span className="ir-hotspot__dot" aria-hidden="true" />
-                  <span className="ir-hotspot__label t-mono">{h.label}</span>
-                </button>
-              ))}
-              <div className="ir-stage__caption t-mono">AEGIS (V2) · Official URRT photograph · annotated</div>
-            </div>
-            <div className="ir-stage__legend t-mono u-muted-dark">
-              <span>◈ Click a marker or a subsystem below</span>
-              <span>8 documented categories</span>
-            </div>
+        <div className="n-works__grid">
+          <Reveal className="n-works__stage">
+            <img src="/assets/rovers/t1.jpeg" alt="AEGIS tracked UGV with a raised 6-DOF arm and articulated flippers on a wooden test course" loading="lazy" />
+            <Annotations />
+            <span className="n-works__caption">AEGIS (V2) · Official URRT photograph · annotated</span>
           </Reveal>
 
-          {/* Subsystem selector + detail */}
-          <Reveal className="ir-detail" delay={80}>
-            <div className="ir-tabs" role="tablist" aria-label="Documented subsystems">
-              {documentedSubsystems.map((s, i) => (
+          <Reveal className="n-works__panel" delay={80}>
+            <div className="n-works__tabs" role="tablist" aria-label="Robot systems">
+              {systems.map((item, i) => (
                 <button
-                  key={s.id}
-                  ref={(el) => { tabRefs.current[i] = el; }}
+                  key={item.id}
                   role="tab"
-                  id={`ss-tab-${s.id}`}
-                  aria-selected={activeId === s.id}
-                  aria-controls="ss-panel"
-                  tabIndex={activeId === s.id ? 0 : -1}
-                  onKeyDown={(e) => onTabKey(e, i)}
-                  onClick={() => setActiveId(s.id)}
-                  className={`ir-tab${activeId === s.id ? " is-active" : ""}`}
+                  aria-selected={i === active}
+                  className={`n-works__tab${i === active ? " is-active" : ""}`}
+                  onClick={() => setActive(i)}
                 >
-                  <span className="t-mono">{s.index}</span>
-                  <span>{s.name}</span>
-                  {!s.documented && <span className="ir-tab__np" title="Not published">·</span>}
+                  <span>{item.num}</span>
+                  <strong>{item.name}</strong>
                 </button>
               ))}
             </div>
 
-            <div id="ss-panel" role="tabpanel" aria-labelledby={`ss-tab-${active.id}`} className="ir-panel" key={active.id}>
-              <div className="l-between u-mb-s">
-                <div className="c-label">Subsystem / {active.index}</div>
-                {active.documented ? (
-                  <span className="c-tag c-tag--lime">Documented</span>
-                ) : (
-                  <span className="c-tag">Not published</span>
-                )}
-              </div>
-              <h3 className="t-h2 u-mb-s">{active.name}</h3>
+            <div className="n-works__detail" key={s.id} role="tabpanel">
+              <div className="n-works__detail__num">SYSTEM {s.num} / 06</div>
+              <h3>{s.name}</h3>
+              <p>{s.plain}</p>
 
-              <div className="ir-panel__block">
-                <div className="c-label u-mb-s">In simple terms</div>
-                <p className="t-body">{active.plain}</p>
-              </div>
-              <div className="ir-panel__block ir-panel__block--tech">
-                <div className="c-label u-mb-s">Technical detail</div>
-                <p className="t-small">{active.technical}</p>
-              </div>
-
-              <div className="ir-panel__specs">
-                <div className="c-label u-mb-s">Known specifications</div>
-                {active.knownSpecs.map((k) => (
-                  <div key={k} className="ir-spec t-small"><span aria-hidden="true">—</span> {k}</div>
-                ))}
-              </div>
-
-              <div className="ir-panel__meta">
-                <div><div className="c-label">Status</div><p className="t-small">{active.status}</p></div>
-                <div><div className="c-label">Limitations</div><p className="t-small">{active.limitations}</p></div>
-                <div><div className="c-label">Related rover</div><p className="t-small">{active.relatedRover}</p></div>
-              </div>
-
-              {active.relatedExperiments.length > 0 && (
-                <div className="ir-panel__links">
-                  <div className="c-label u-mb-s">Related evidence</div>
-                  {active.relatedExperiments.map((slug) => (
-                    <Link key={slug} href={`/experiments/${slug}`} className="c-link">
-                      {slug.replace(/-/g, " ")} <span aria-hidden="true">↗</span>
-                    </Link>
-                  ))}
+              <details className="n-works__more">
+                <summary>Technical details</summary>
+                <div className="n-works__more__body">
+                  <p>{s.technical}</p>
+                  <p style={{ marginTop: 10 }}>{s.detail}</p>
                 </div>
-              )}
+              </details>
+
+              <div className="n-works__status">
+                Status: <b>{s.published ? s.status : "Not published"}</b>
+              </div>
             </div>
           </Reveal>
         </div>

@@ -1,0 +1,106 @@
+[
+  {
+    "name": "01-hero-fold",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "02-home-full",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": true,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "03-problem-selected",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "04-robots-showcase",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "05-works-selected",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "06-journey",
+    "url": "/",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "07-product-overlay",
+    "url": "/robots/aegis",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "08-engineering-tree-desktop",
+    "url": "/engineering-tree",
+    "viewport": "1440x900",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "09-home-mobile-fold",
+    "url": "/",
+    "viewport": "390x844",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "10-home-mobile-full",
+    "url": "/",
+    "viewport": "390x844",
+    "full": true,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "11-engineering-tree-mobile",
+    "url": "/engineering-tree",
+    "viewport": "390x844",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "12-tree-3d-stage",
+    "url": "/engineering-tree",
+    "viewport": "1440x1000",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  },
+  {
+    "name": "13-tree-2d-mobile-stage",
+    "url": "/engineering-tree",
+    "viewport": "390x844",
+    "full": false,
+    "overflowX": 0,
+    "errors": []
+  }
+]

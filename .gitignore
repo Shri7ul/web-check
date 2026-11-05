@@ -5,21 +5,28 @@ node_modules/
 .next/
 out/
 
-# Build
-build/
-dist/
+# Research
+research/
 
-# Environment variables
+# Build
+dist/
+build/
+
+# Playwright
+playwright-report/
+test-results/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Environment
 .env
 .env.*
 !.env.example
 
 # Logs
 *.log
-npm-debug.log*
 
 # OS
 .DS_Store
 Thumbs.db
-
-.research/

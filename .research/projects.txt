@@ -1,0 +1,99 @@
+Rover Projects — URRT
+Projects
+Advisors
+Team
+Gears
+Qualification Video
+Assets
+Contact
+Join Us
+Sponsor
+Projects
+Advisors
+Team
+Gears
+Qualification Video
+Assets
+Contact
+Join Us
+Become Sponsor
+Back to Home
+Projects
+Engineering Division
+ROVER
+PROTOTYPES
+URRT — UIU RESCUE ROVER TEAM
+Two generations of rescue robotics engineering from first prototype to competition ready platform targeting RoboCup Rescue 2026.
+Aegis
+V2
+Zugbee X1
+V1
+VERSION 2 — CURRENT
+ACTIVE DEVELOPMENT
+// PROTOTYPE_02 / TRACKED UGV
+AEGIS
+RESCUE TECHNOLOGY PLATFORM
+AEGIS is a tracked Unmanned Ground Vehicle (UGV) designed for USAR (Urban Search and Rescue)environments. It integrates high-mobility locomotion with active flippers, a multi-sensor perception stack, and a 6-DOF robotic manipulator for dexterous interaction in confined and hazardous spaces.
+Tracked Locomotion
+Active Flippers
+6-DOF Arm
+USAR Ready
+Multi-Sensor
+Autonomous Nav
+Visual Gallery
+Technical Specifications
+Platform
+Tracked UGV
+Locomotion
+Rubber Tracks + Active Flippers
+Manipulator
+6-DOF Robotic Arm
+Sensors
+LiDAR, Depth Camera, IMU
+Design
+Modular, Rapid Deployment
+Status
+In Development
+Core Sub-Systems
+LOCOMOTION
+Tracks + Active Flippers
+Continuous rubber tracks with articulated front and rear flippers enable traversal of stairs, rubble piles, and extreme terrain profiles found in disaster zones.
+PERCEPTION
+Multi-Sensor Stack
+Integrated LiDAR, RGBD depth cameras, and IMU provide a 360° spatial awareness pipeline for SLAM-based mapping and victim detection.
+MANIPULATION
+6-DOF Robotic Arm
+A 6 degree-of-freedom articulated arm allows the robot to interact with victims, open doors, move debris, and operate equipment in confined hazardous spaces.
+VERSION 1 — LEGACY
+COMPLETED — JAN 2025
+// PROTOTYPE_01 / WHEELED ROVER
+ZUGBEE X1
+ADVANCED SEARCH & RESCUE PLATFORM
+Our inaugural rescue rover the platform that started it all. Completed in January 2025, Zugbee X1 established the foundational architecture, sensor integration pipeline, and software stack that AEGIS builds upon.
+First Prototype
+Basic Mobility
+Sensor Stack
+Visual Gallery
+Technical Specifications
+Platform
+Wheeled Rover
+Locomotion
+4-Wheel Drive
+Manipulator
+Basic End-Effector
+Sensors
+Camera, Ultrasonic
+Completed
+January 2025
+Status
+Legacy / Completed
+// LEGACY PLATFORM
+THE FOUNDATION OF AEGIS
+Zugbee X1 taught us everything we needed to build AEGIS. From mechanical design constraints to software architecture decisions, the lessons from our first prototype directly shaped Bangladesh's RoboCup 2026 entry.
+View AEGIS — Version 2
+Join the Mission
+WANT TO BUILD WITH US?
+Engineers, designers, researchers — URRT is always looking for motivated people to join Bangladesh's premier rescue robotics team.
+Join Our Team
+Get In Touch
+© 2026 URRT – UIU Rescue Rover Team. All rights reserved.

@@ -94,6 +94,7 @@ export const primaryNav: NavItem[] = [
 
 export const secondaryNav: NavItem[] = [
   { href: "/experiments", label: "Experiments", index: "07b" },
+  { href: "/engineering-tree", label: "Engineering Tree", index: "06b" },
   { href: "/resources", label: "Resources", index: "—" },
   { href: "/join", label: "Join", index: "09" },
   { href: "/collaborate", label: "Collaborate", index: "09" },
@@ -105,8 +106,9 @@ export const routes = [
   { href: "/robots", label: "Robot Universe", scene: "03" },
   { href: "/robots/[slug]", label: "Rover product detail (deep link)", scene: "03" },
   { href: "/engineering", label: "Engineering & how we build", scene: "04–05" },
-  { href: "/people", label: "People & the Engineering Tree", scene: "06" },
-  { href: "/research", label: "Research", scene: "07" },
+  { href: "/people", label: "People & the team", scene: "07" },
+  { href: "/engineering-tree", label: "Engineering Tree (interactive)", scene: "06b" },
+  { href: "/research", label: "Research", scene: "06" },
   { href: "/research/[slug]", label: "Research topic detail", scene: "07" },
   { href: "/experiments", label: "Experiments / evidence explorer", scene: "07" },
   { href: "/experiments/[slug]", label: "Evidence item detail", scene: "07" },
