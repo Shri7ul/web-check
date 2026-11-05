@@ -8,19 +8,28 @@ import { Reveal } from "@/components/ui/Reveal";
 
 /**
  * Scene 05 — FROM DESIGN TO REALITY.
- * A five-stage visual stepper. One stage at a time: real project photograph,
- * short explanation, tools/subsystems and a link to a verified record.
- * Not five large text cards.
+ * Four-stage horizontal visual timeline: Design → Build → Test → Improve.
+ * Each step carries one authentic project photograph; selecting it changes the
+ * displayed image and a short, verified description. Four of the six published
+ * process stages are shown — none are invented.
  */
-const stageMap = [
-  { step: "Design", related: { href: "/engineering", label: "Engineering disciplines" } },
-  { step: "Build", related: { href: "/robots/zugbee-x1", label: "Zugbee X1 record" } },
-  { step: "Integrate", related: { href: "/robots/aegis", label: "AEGIS architecture" } },
-  { step: "Test", related: { href: "/experiments/terrain-traversal-testing", label: "Terrain testing evidence" } },
-  { step: "Improve", related: { href: "/journey", label: "Verified timeline" } },
+const defs = [
+  { step: "Design", id: "system-design", related: { href: "/engineering", label: "Engineering disciplines" } },
+  { step: "Build", id: "prototype", related: { href: "/robots/zugbee-x1", label: "Zugbee X1 record" } },
+  { step: "Test", id: "testing", related: { href: "/experiments/terrain-traversal-testing", label: "Terrain testing evidence" } },
+  { step: "Improve", id: "iteration", related: { href: "/journey", label: "Verified timeline" } },
 ];
 
-const stages = buildStages.slice(1).map((s, i) => ({ ...s, ...stageMap[i] }));
+const stageById = new Map(buildStages.map((s) => [s.id, s]));
+
+const short: Record<string, string> = {
+  "system-design": "Mechanical, electrical and software subteams split the system. CAD, PCB design and ROS are the working toolchain.",
+  prototype: "Zugbee X1, the first wheeled rover, established the mechanical, sensor and software foundations.",
+  testing: "AEGIS on a wooden stair-and-rubble course, documented in official photographs and a RoboCup 2026 qualification video.",
+  iteration: "Lessons from Zugbee X1 directly shaped AEGIS, the platform URRT is preparing for RoboCup Rescue 2026.",
+};
+
+const stages = defs.map((d) => ({ ...d, data: stageById.get(d.id)! }));
 
 export function HowWeBuild() {
   const [active, setActive] = useState(0);
@@ -34,59 +43,37 @@ export function HowWeBuild() {
           index="05"
           eyebrow="From Design to Reality"
           title={<>From a sketch <em>to a machine.</em></>}
-          intro="Five stages. Select one to see what actually happens."
+          intro="Four stages. Select one to see the work."
         />
 
-        <Reveal className="n-process__stepper" role="tablist" aria-label="Build stages">
+        <div className="n-steps">
           {stages.map((item, i) => (
             <button
               key={item.id}
-              role="tab"
-              aria-selected={i === active}
-              className={`n-process__step${i === active ? " is-active" : ""}${i < active ? " is-done" : ""}`}
+              className={`n-step${i === active ? " is-active" : ""}`}
               onClick={() => setActive(i)}
+              aria-pressed={i === active}
             >
-              <span className="n-process__step__line" aria-hidden="true" />
-              <span className="n-process__step__num">0{i + 1}</span>
-              <span className="n-process__step__name">{item.step}</span>
+              <div className="n-step__media">
+                <img src={item.data.image} alt={item.data.imageAlt} loading="lazy" />
+              </div>
+              <span className="n-step__num n-mono">0{i + 1}</span>
+              <span className="n-step__name">{item.step}</span>
             </button>
           ))}
-        </Reveal>
+        </div>
 
-        <Reveal className="n-process__view" delay={60}>
-          <div className="n-process__media">
-            <img key={s.image} src={s.image} alt={s.imageAlt} loading="lazy" />
-            <span className="n-process__media__cap">Official URRT project photograph</span>
+        <Reveal className="n-steps__panel" delay={50}>
+          <div className="n-steps__panel__media">
+            <img key={s.id} src={s.data.image} alt={s.data.imageAlt} loading="lazy" />
           </div>
-          <div className="n-process__copy" key={s.id}>
-            <span className="n-kicker">0{active + 1} / 05 · {s.step}</span>
-            <h3>{s.title}</h3>
-            <p>{s.subtitle}. {s.explanation}</p>
-
-            <div className="n-process__facts">
-              <div className="n-process__fact">
-                <span>Tools / subsystems</span>
-                <span>{s.systems.join(" · ")}</span>
-              </div>
-              <div className="n-process__fact">
-                <span>Verified record</span>
-                <span>{s.evidence}</span>
-              </div>
-            </div>
-
-            <Link className="n-link" href={s.related.href} style={{ marginTop: 20 }}>
+          <div className="n-steps__panel__copy" key={s.id} aria-live="polite">
+            <span className="n-kicker">0{active + 1} / 04 · {s.step}</span>
+            <h3>{s.data.title}</h3>
+            <p>{short[s.data.id]}</p>
+            <Link className="n-link" href={s.related.href}>
               {s.related.label} <span aria-hidden="true">↗</span>
             </Link>
-
-            <div className="n-process__nav">
-              <button onClick={() => setActive((i) => Math.max(0, i - 1))} disabled={active === 0}>
-                ← Previous
-              </button>
-              <span className="n-process__nav__count">0{active + 1} / 05</span>
-              <button onClick={() => setActive((i) => Math.min(stages.length - 1, i + 1))} disabled={active === stages.length - 1}>
-                Next →
-              </button>
-            </div>
           </div>
         </Reveal>
       </div>

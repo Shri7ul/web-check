@@ -15,7 +15,7 @@ test.describe("Homepage", () => {
 
   test("assembles the visual story in order, without a tree on the homepage", async ({ page }) => {
     await page.goto("/");
-    const ids = ["problem", "robots", "how-it-works", "process", "research", "people", "journey", "join"];
+    const ids = ["robots", "problem", "how-it-works", "process", "research", "journey", "people", "join"];
     for (const id of ids) {
       await expect(page.locator(`#${id}`), `missing scene #${id}`).toHaveCount(1);
     }
@@ -23,7 +23,7 @@ test.describe("Homepage", () => {
     await expect(page.locator("#engineering-tree")).toHaveCount(0);
 
     const order = await page.evaluate(() =>
-      ["problem", "robots", "how-it-works", "process", "research", "people", "journey", "join"]
+      ["robots", "problem", "how-it-works", "process", "research", "journey", "people", "join"]
         .map((id) => ({ id, top: document.getElementById(id)?.getBoundingClientRect().top ?? 0 })),
     );
     const tops = order.map((o) => o.top);

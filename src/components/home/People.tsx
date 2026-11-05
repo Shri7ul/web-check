@@ -1,39 +1,53 @@
 import Link from "next/link";
-import { subteams } from "@/content/members";
 import { SectionHead } from "./SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
 
-/** Scene 07 — THE PEOPLE BEHIND THE MACHINES. Brief, one authentic photo. */
+/**
+ * Scene 08 — THE PEOPLE BEHIND THE MACHINES.
+ * A small grid of authentic team photographs and minimal copy. Links point to
+ * the dedicated people / engineering pages; the Engineering Tree is not placed
+ * on the homepage.
+ */
+const tiles = [
+  { src: "/assets/people/Team.jpg", alt: "URRT team members gathered with the rescue rover outdoors" },
+  { src: "/assets/scenes/a1.png", alt: "URRT team with the tracked rescue rover and team banner" },
+  { src: "/assets/scenes/ho3.jpg", alt: "URRT team members together" },
+];
+
 export function People() {
   return (
     <section id="people" className="n-section n-people" aria-labelledby="people-title">
       <div className="n-wrap">
         <span id="people-title" className="u-sr-only">The people behind the machines</span>
         <div className="n-people__grid">
-          <Reveal className="n-people__media">
-            <img src="/assets/people/Team.jpg" alt="URRT team members gathered with the rescue rover outdoors" loading="lazy" />
-            <span className="n-people__cap">URRT team · Official photograph</span>
+          <Reveal className="n-team__grid">
+            {tiles.map((t, i) => (
+              <figure key={t.src} className={`n-team__tile n-team__tile--${i + 1}`}>
+                <img src={t.src} alt={t.alt} loading="lazy" />
+                {i === 0 && <figcaption className="n-team__cap">URRT · Official photograph</figcaption>}
+              </figure>
+            ))}
           </Reveal>
 
-          <Reveal className="n-people__copy" delay={80}>
+          <Reveal className="n-team__copy" delay={70}>
             <SectionHead
-              index="07"
+              index="08"
               eyebrow="The People"
               title={<>The people behind <em>the machines.</em></>}
             />
             <p>
-              A rescue rover is not built by one discipline. Mechanical, electrical, software and operations
-              engineers work on the same machine — from the chassis and circuits to the autonomy stack and the
-              documentation that gets it to competition.
+              15 published members across four subteams build the same machine — from the chassis
+              and circuits to autonomy and the documentation that gets it to competition.
             </p>
-            <ul className="n-people__disciplines">
-              {subteams.map((s) => (
-                <li key={s.id}>{s.shortName}</li>
-              ))}
-            </ul>
-            <Link className="n-btn n-btn--dark" href="/engineering-tree">
-              Explore the engineering tree <span className="n-arrow" aria-hidden="true">↗</span>
-            </Link>
+            <div className="n-team__tags n-mono">Mechanical · Electrical · Software · Operations</div>
+            <div className="n-team__links">
+              <Link className="n-btn n-btn--dark" href="/people">
+                Meet the team <span className="n-arrow" aria-hidden="true">↗</span>
+              </Link>
+              <Link className="n-link" href="/engineering">
+                How we are organised <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
           </Reveal>
         </div>
       </div>

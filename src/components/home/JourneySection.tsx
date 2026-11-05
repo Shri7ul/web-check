@@ -6,16 +6,19 @@ import { timeline } from "@/content/timeline";
 import { Reveal } from "@/components/ui/Reveal";
 
 /**
- * Scene 08 — THE JOURNEY.
- * Two-column editorial timeline. Left: date, label, sequence. Right:
- * heading, short description, authentic media, related record.
- * Verified milestones only; planned work is labelled.
+ * Scene 07 — THE JOURNEY.
+ * Two-column editorial timeline. Left: date, sequence and milestone marker.
+ * Right: title, short description, authentic media and a related record.
+ * Verified milestones only; planned work is labelled. An IntersectionObserver
+ * subtly highlights the milestone in view without hijacking scroll.
  */
 const media: Record<string, { src: string; alt: string }> = {
   formation: { src: "/assets/scenes/a1.png", alt: "URRT team with the rescue rover and team banner" },
   "zugbee-x1": { src: "/assets/rovers/prototype-x1.jpeg", alt: "The red-and-white Zugbee X1 rover outdoors" },
   "final-rover": { src: "/assets/rovers/t1.jpeg", alt: "AEGIS tracked UGV with raised arm on the test course" },
+  "tdp-tpf": { src: "/assets/scenes/a2.png", alt: "URRT team members with the tracked rescue rover and team banner" },
   "qualification-video": { src: "/assets/rovers/t3.jpeg", alt: "AEGIS climbing a wooden staircase during testing" },
+  "robocup-2026": { src: "/assets/people/Team.jpg", alt: "URRT team members gathered with the rescue rover outdoors" },
 };
 
 const related: Record<string, { href: string; label: string }> = {
@@ -60,7 +63,7 @@ export function JourneySection() {
         <span id="journey-title" className="u-sr-only">The journey</span>
         <div className="n-journey__head">
           <div className="n-eyebrow n-mono">
-            <span className="n-eyebrow__num">08</span>
+            <span className="n-eyebrow__num">07</span>
             <span className="n-eyebrow__dot" aria-hidden="true" />
             <span>The Journey</span>
           </div>
