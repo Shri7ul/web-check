@@ -1,0 +1,47 @@
+{
+  "/": {
+    "domContentLoadedMs": 311,
+    "loadMs": 559,
+    "responseEndMs": 4,
+    "resourceCount": 33,
+    "transferredKB": 1290,
+    "lcpMs": 352,
+    "cls": 0.052
+  },
+  "/robots": {
+    "domContentLoadedMs": 254,
+    "loadMs": 519,
+    "responseEndMs": 4,
+    "resourceCount": 29,
+    "transferredKB": 1321,
+    "lcpMs": 276,
+    "cls": 0.012
+  },
+  "/people": {
+    "domContentLoadedMs": 286,
+    "loadMs": 523,
+    "responseEndMs": 5,
+    "resourceCount": 32,
+    "transferredKB": 1665,
+    "lcpMs": 296,
+    "cls": 0.014
+  },
+  "/engineering": {
+    "domContentLoadedMs": 298,
+    "loadMs": 526,
+    "responseEndMs": 4,
+    "resourceCount": 26,
+    "transferredKB": 750,
+    "lcpMs": 308,
+    "cls": 0.024
+  },
+  "/research": {
+    "domContentLoadedMs": 272,
+    "loadMs": 508,
+    "responseEndMs": 3,
+    "resourceCount": 26,
+    "transferredKB": 532,
+    "lcpMs": 288,
+    "cls": 0.007
+  }
+}
